@@ -1,0 +1,78 @@
+# Default configuration for ctrader
+
+# General settings
+general:
+  log_level: INFO
+  data_dir: data
+  models_dir: models
+  logs_dir: logs
+
+# Exchange settings
+exchange:
+  name: binance
+  api_key: ""  # Will be overridden by environment variables
+  api_secret: ""  # Will be overridden by environment variables
+  testnet: true  # Use testnet for development
+  rate_limit:
+    max_requests_per_minute: 1200
+    headroom_percentage: 20  # Keep 20% below the limit
+
+# Data collection settings
+data:
+  websocket:
+    reconnect_interval: 5  # seconds
+    max_reconnect_attempts: 10
+  symbols:
+    - BTC/USDT
+    - ETH/USDT
+    - BNB/USDT
+  timeframes:
+    - 1m
+    - 5m
+    - 15m
+  cache:
+    redis:
+      host: localhost
+      port: 6379
+      db: 0
+      ttl: 3600  # seconds
+
+# Strategy settings
+strategies:
+  triangular_arbitrage:
+    enabled: true
+    min_profit_threshold: 0.001  # 0.1%
+    max_trade_amount: 100  # USDT
+    symbols:
+      - BTC/USDT
+      - ETH/USDT
+      - ETH/BTC
+
+# ML settings
+ml:
+  enabled: false  # Initially disabled
+  models:
+    - name: price_prediction
+      type: regression
+      features:
+        - close
+        - volume
+        - rsi
+        - macd
+      target: close_future_5m
+      train_interval: 86400  # seconds (daily)
+
+# Risk management settings
+risk:
+  max_position_size: 100  # USDT
+  max_open_positions: 3
+  stop_loss_percentage: 0.01  # 1%
+  daily_loss_limit: 50  # USDT
+
+# Execution settings
+execution:
+  order_types:
+    - LIMIT
+    - MARKET
+  default_order_type: LIMIT
+  timeout: 10  # seconds
