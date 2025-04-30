@@ -33,12 +33,9 @@ class BinanceWebSocketClient:
         self.callbacks: Dict[str, List[Callable[[Dict[str, Any]], None]]] = {}
         self.websocket = None
         self.running = False
-        self.reconnect_interval = config_manager.get(
-            "data", "websocket", "reconnect_interval", 5
-        )
-        self.max_reconnect_attempts = config_manager.get(
-            "data", "websocket", "max_reconnect_attempts", 10
-        )
+        websocket_config = config_manager.get("data", "websocket", {})
+        self.reconnect_interval = websocket_config.get("reconnect_interval", 5)
+        self.max_reconnect_attempts = websocket_config.get("max_reconnect_attempts", 10)
         self.testnet = config_manager.get("exchange", "testnet", True)
         
     @property
@@ -313,3 +310,128 @@ class BinanceMarketDataClient:
 
 # Create a singleton instance
 binance_market_data_client = BinanceMarketDataClient()
+
+
+# Keep the existing BinanceWebSocketClient and BinanceMarketDataClient classes
+
+# Import ccxt.pro for the new WebSocketClient implementation
+import ccxt.pro
+
+class WebSocketClient:
+    """WebSocket client for real-time trade data using ccxt.pro.
+    
+    This class connects to Binance using ccxt.pro and subscribes to the public trades stream
+    for the configured symbols. It receives and logs trade data in real-time.
+    
+    Attributes:
+        config: Configuration dictionary or manager
+        symbols: List of symbols to subscribe to
+        logger: Logger instance
+        exchange: ccxt.pro exchange instance
+        running: Flag indicating if the client is running
+    """
+    
+    def __init__(self, config, strategy, logger):
+        """Initialize the WebSocket client.
+        
+        Args:
+            config: Configuration dictionary or manager
+            strategy: Strategy instance (subclass of BaseStrategy)
+            logger: Logger instance
+        """
+        self.config = config
+        self.strategy = strategy
+        self.logger = logger
+        self.running = False
+        self.symbols = self.strategy.config.get('symbols', [])
+        
+        # Initialize ccxt.pro.binance with keys/testnet from config
+        api_key = None
+        api_secret = None
+        
+        if isinstance(config, dict):
+            api_key = config.get('exchange', {}).get('api_key')
+            api_secret = config.get('exchange', {}).get('api_secret')
+            testnet = config.get('exchange', {}).get('testnet', True)
+        else:
+            # Assume it's a ConfigManager instance
+            api_key = config.get('exchange', 'api_key')
+            api_secret = config.get('exchange', 'api_secret')
+            testnet = config.get('exchange', 'testnet', True)
+        
+        exchange_options = {
+            'enableRateLimit': True,
+        }
+        
+        if api_key and api_secret:
+            exchange_options['apiKey'] = api_key
+            exchange_options['secret'] = api_secret
+            
+        self.exchange = ccxt.pro.binance(exchange_options)
+        
+        # Set testnet mode if configured
+        if testnet:
+            self.exchange.set_sandbox_mode(True)
+            self.logger.info("Using Binance testnet")
+        
+    async def connect(self):
+        """Connect to the WebSocket and subscribe to trade streams.
+        
+        This method establishes the WebSocket connection and subscribes to the
+        public trades stream for the configured symbols.
+        """
+        self.logger.info(f"Connecting to WebSocket for symbols: {self.symbols}")
+        # No explicit connect needed before watch loop in ccxt.pro
+        # The connection is established when watch_trades is called
+        
+    async def _handle_messages(self):
+        """Handle WebSocket messages in a loop.
+        
+        This method runs indefinitely after connection, receiving trade messages
+        from the watch_trades stream and logging the essential trade details.
+        """
+        self.running = True
+        while self.running:
+            try:
+                # Watch trades for all symbols
+                trades = await self.exchange.watch_trades(self.symbols)
+                for trade in trades:
+                    # Pass trade data to strategy
+                    await self.strategy.on_trade(trade)
+            except Exception as e:
+                self.logger.error(f"WebSocket error: {e}. Attempting reconnect...")
+                await asyncio.sleep(5)  # Delay before implicit reconnect
+                
+    async def start(self):
+        """Start the WebSocket client.
+        
+        This method connects to the WebSocket and starts the message handling loop.
+        """
+        if self.running:
+            return
+            
+        self.logger.info(f"Starting WebSocket client for symbols: {self.symbols}")
+        try:
+            await self.connect()
+            await self._handle_messages()
+        except Exception as e:
+            self.logger.error(f"Error starting WebSocket client: {e}")
+            
+    async def stop(self):
+        """Stop the WebSocket client.
+        
+        This method gracefully closes the WebSocket connection.
+        """
+        if not self.running:
+            return
+            
+        self.running = False
+        self.logger.info("Stopping WebSocket client")
+        
+        if hasattr(self, 'exchange') and self.exchange:
+            try:
+                self.logger.info("Closing WebSocket connection...")
+                await self.exchange.close()
+                self.logger.info("WebSocket connection closed.")
+            except Exception as e:
+                self.logger.error(f"Error closing WebSocket connection: {e}")

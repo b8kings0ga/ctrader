@@ -106,3 +106,572 @@
 2025-04-29 21:08:18.230 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
 2025-04-29 21:08:18.230 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
 2025-04-29 21:08:18.230 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:24:23.640 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 21:24:23.643 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:24:23.643 | INFO     | src.strategies.arbitrage_strategy:initialize:25 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:24:23.644 | INFO     | src.strategies.arbitrage_strategy:initialize:38 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:24:23.644 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:24:23.644 | INFO     | src.strategies.arbitrage_strategy:initialize:25 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:24:23.644 | INFO     | src.strategies.arbitrage_strategy:initialize:38 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:24:23.644 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:24:23.644 | INFO     | src.strategies.arbitrage_strategy:initialize:25 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:24:23.644 | INFO     | src.strategies.arbitrage_strategy:initialize:38 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:24:23.645 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:24:23.645 | INFO     | src.strategies.arbitrage_strategy:initialize:25 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:24:23.645 | INFO     | src.strategies.arbitrage_strategy:initialize:38 - Strategy configured with: min_profit_threshold=0.002, max_trade_amount=200, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:24:23.645 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:24:23.645 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:24:23.646 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:24:23.646 | INFO     | src.strategies.arbitrage_strategy:initialize:25 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:24:23.646 | INFO     | src.strategies.arbitrage_strategy:initialize:38 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:24:23.646 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:24:23.646 | INFO     | src.strategies.arbitrage_strategy:initialize:25 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:24:23.646 | INFO     | src.strategies.arbitrage_strategy:initialize:38 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:24:53.238 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 21:24:53.729 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-29 21:24:53.796 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:24:53.796 | INFO     | src.strategies.arbitrage_strategy:initialize:25 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:24:53.796 | INFO     | src.strategies.arbitrage_strategy:initialize:38 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:24:53.797 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:24:53.797 | INFO     | src.strategies.arbitrage_strategy:initialize:25 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:24:53.797 | INFO     | src.strategies.arbitrage_strategy:initialize:38 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:24:53.798 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:24:53.798 | INFO     | src.strategies.arbitrage_strategy:initialize:25 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:24:53.798 | INFO     | src.strategies.arbitrage_strategy:initialize:38 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:24:53.799 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:24:53.799 | INFO     | src.strategies.arbitrage_strategy:initialize:25 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:24:53.799 | INFO     | src.strategies.arbitrage_strategy:initialize:38 - Strategy configured with: min_profit_threshold=0.002, max_trade_amount=200, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:24:53.799 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:24:53.800 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:24:53.801 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:24:53.801 | INFO     | src.strategies.arbitrage_strategy:initialize:25 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:24:53.801 | INFO     | src.strategies.arbitrage_strategy:initialize:38 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:24:53.801 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:24:53.802 | INFO     | src.strategies.arbitrage_strategy:initialize:25 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:24:53.802 | INFO     | src.strategies.arbitrage_strategy:initialize:38 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:24:53.802 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:24:53.803 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:24:53.803 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:31:21.309 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 21:31:21.768 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-29 21:31:21.897 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:31:21.897 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:31:21.898 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:31:21.898 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:31:21.898 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:31:21.898 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:31:21.899 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:31:21.899 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:31:21.900 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:31:21.900 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:31:21.901 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:31:21.901 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.002, max_trade_amount=200, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:31:21.902 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:31:21.902 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:31:21.903 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:31:21.903 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:31:21.903 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:31:21.904 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:31:21.904 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:31:21.904 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:31:21.905 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:31:21.905 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:31:21.906 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:32:46.594 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 21:32:46.662 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-29 21:33:26.276 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 21:33:26.310 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-29 21:33:59.574 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 21:33:59.611 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-29 21:34:31.832 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 21:34:32.182 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-29 21:34:32.249 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:34:32.249 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:34:32.249 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:34:32.250 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:34:32.250 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:34:32.250 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:34:32.297 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:34:32.297 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:34:32.297 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:34:32.298 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:34:32.298 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:34:32.298 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.002, max_trade_amount=200, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:34:32.298 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:34:32.299 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:34:32.300 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:34:32.300 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:34:32.300 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:34:32.300 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:34:32.301 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:34:32.301 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:34:32.301 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:34:32.302 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:34:32.303 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:35:51.022 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 21:35:51.349 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-29 21:35:51.408 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:35:51.408 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:35:51.408 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:35:51.409 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:35:51.409 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:35:51.409 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:35:51.410 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:35:51.410 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:35:51.410 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:35:51.411 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:35:51.411 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:35:51.411 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.002, max_trade_amount=200, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:35:51.412 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:35:51.412 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:35:51.413 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:35:51.413 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:35:51.413 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:35:51.413 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:35:51.414 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:35:51.414 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:35:51.414 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:35:51.415 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:35:51.415 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:39:16.817 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 21:39:17.322 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-29 21:39:45.015 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 21:39:45.379 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-29 21:39:45.440 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:39:45.441 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:39:45.441 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:39:45.441 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:39:45.441 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:39:45.441 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:39:45.442 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:39:45.442 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:39:45.442 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:39:45.443 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:39:45.443 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:39:45.443 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.002, max_trade_amount=200, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:39:45.443 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:39:45.444 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:39:45.445 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:39:45.445 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:39:45.445 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:39:45.445 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:39:45.445 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:39:45.445 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:39:45.446 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:39:45.447 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:39:45.447 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:42:30.365 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 21:43:36.585 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 21:44:07.555 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 21:44:07.978 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-29 21:44:08.052 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:44:08.053 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:44:08.053 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:44:08.053 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:44:08.053 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:44:08.054 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:44:08.055 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:44:08.055 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:44:08.055 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:44:08.056 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:44:08.056 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:44:08.056 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.002, max_trade_amount=200, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:44:08.057 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:44:08.058 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:44:08.059 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:44:08.059 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:44:08.059 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:44:08.059 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:44:08.060 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:44:08.060 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:44:08.060 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:44:08.061 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:44:08.062 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:45:41.954 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 21:45:42.287 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-29 21:45:42.353 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:45:42.353 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:45:42.353 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:45:42.353 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:45:42.353 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:45:42.353 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:45:42.354 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:45:42.354 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:45:42.354 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:45:42.355 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:45:42.355 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:45:42.355 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.002, max_trade_amount=200, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:45:42.356 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:45:42.356 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:45:42.357 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:45:42.357 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:45:42.357 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:45:42.358 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:45:42.358 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:45:42.358 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:45:42.359 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:45:42.360 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:45:42.360 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:47:07.826 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 21:47:08.173 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-29 21:47:08.831 | INFO     | src.data.websocket_client:start:409 - Starting WebSocket client
+2025-04-29 21:47:08.831 | ERROR    | src.data.websocket_client:connect:401 - Error connecting to WebSocket: unhashable type: 'dict'
+2025-04-29 21:47:08.866 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:47:08.866 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:47:08.866 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:47:08.867 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:47:08.867 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:47:08.867 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:47:08.868 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:47:08.868 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:47:08.868 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:47:08.869 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:47:08.869 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:47:08.869 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.002, max_trade_amount=200, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:47:08.870 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:47:08.870 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:47:08.872 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:47:08.872 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:47:08.872 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:47:08.873 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:47:08.873 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:47:08.873 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:47:08.874 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:47:08.875 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:47:08.875 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:52:42.612 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 21:52:43.126 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:52:43.127 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:52:43.127 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:52:43.127 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:52:43.128 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:52:43.128 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:52:43.128 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:52:43.128 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:52:43.128 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:52:43.129 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:52:43.129 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:52:43.129 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.002, max_trade_amount=200, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:52:43.130 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:52:43.131 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:52:43.131 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:52:43.131 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:52:43.131 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:52:43.132 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:52:43.132 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:52:43.132 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:52:43.133 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:52:43.134 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:52:43.134 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:56:45.792 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 21:56:55.877 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 21:56:56.350 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-29 21:56:56.452 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:56:56.452 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:56:56.452 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:56:56.453 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:56:56.453 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:56:56.453 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:56:56.454 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:56:56.454 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:56:56.454 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:56:56.455 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:56:56.455 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:56:56.455 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.002, max_trade_amount=200, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:56:56.456 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:56:56.456 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:56:56.457 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:56:56.457 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:56:56.457 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:56:56.458 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:56:56.458 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:56:56.458 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:56:56.461 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:56:56.461 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:56:56.462 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:57:50.058 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 21:57:50.467 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-29 21:57:50.557 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:57:50.557 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:57:50.557 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:57:50.559 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:57:50.559 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:57:50.559 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:57:50.560 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:57:50.560 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:57:50.560 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:57:50.560 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:57:50.560 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:57:50.560 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.002, max_trade_amount=200, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:57:50.561 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:57:50.562 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:57:50.562 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:57:50.562 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:57:50.563 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:57:50.563 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (test_arbitrage) initialized
+2025-04-29 21:57:50.563 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 21:57:50.563 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT', 'ETH/USDT', 'ETH/BTC'], fee_pct=0.001
+2025-04-29 21:57:50.565 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:57:50.565 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 21:57:50.566 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy ConcreteStrategy (test_strategy) initialized
+2025-04-29 22:04:02.060 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 22:04:07.383 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-29 22:05:02.892 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 22:05:03.288 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-29 22:31:37.837 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 22:31:37.838 | INFO     | __main__:main_async:161 - Starting ctrader with strategy triangular_arbitrage on ETH/USDT
+2025-04-29 22:31:37.838 | INFO     | __main__:main_async:162 - Mode: Paper Trading
+2025-04-29 22:31:37.838 | INFO     | __main__:main_async:167 - Using mock connector for paper trading
+2025-04-29 22:31:37.839 | INFO     | src.execution.order_manager:__init__:43 - Order manager initialized
+2025-04-29 22:31:37.839 | ERROR    | __main__:main_async:217 - Error in main_async: unhashable type: 'dict'
+2025-04-29 22:31:37.839 | INFO     | __main__:main_async:219 - Shutting down ctrader
+2025-04-29 22:37:50.014 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 22:37:50.534 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-29 22:37:50.547 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 22:37:50.547 | INFO     | __main__:main_async:160 - Starting ctrader with strategy simple_arbitrage on BTC/USDT
+2025-04-29 22:37:50.547 | INFO     | __main__:main_async:161 - Mode: Paper Trading
+2025-04-29 22:37:50.547 | INFO     | __main__:main_async:166 - Using mock connector for paper trading
+2025-04-29 22:37:50.547 | INFO     | src.execution.order_manager:__init__:43 - Order manager initialized
+2025-04-29 22:37:50.547 | ERROR    | __main__:main_async:216 - Error in main_async: unhashable type: 'dict'
+2025-04-29 22:37:50.547 | INFO     | __main__:main_async:218 - Shutting down ctrader
+2025-04-29 22:40:36.050 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 22:40:36.575 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-29 22:40:36.589 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 22:40:36.589 | INFO     | __main__:main_async:160 - Starting ctrader with strategy simple_arbitrage on BTC/USDT
+2025-04-29 22:40:36.589 | INFO     | __main__:main_async:161 - Mode: Paper Trading
+2025-04-29 22:40:36.589 | INFO     | __main__:main_async:166 - Using mock connector for paper trading
+2025-04-29 22:40:36.589 | INFO     | src.execution.order_manager:__init__:43 - Order manager initialized
+2025-04-29 22:40:36.589 | INFO     | src.risk.risk_manager:__init__:45 - Risk manager initialized
+2025-04-29 22:40:36.589 | INFO     | src.risk.risk_manager:__init__:45 - Risk manager initialized
+2025-04-29 22:40:36.589 | ERROR    | __main__:main_async:216 - Error in main_async: unhashable type: 'dict'
+2025-04-29 22:40:36.589 | INFO     | __main__:main_async:218 - Shutting down ctrader
+2025-04-29 22:42:05.069 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 22:42:05.592 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-29 22:42:05.606 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 22:42:05.607 | INFO     | __main__:main_async:160 - Starting ctrader with strategy simple_arbitrage on BTC/USDT
+2025-04-29 22:42:05.607 | INFO     | __main__:main_async:161 - Mode: Paper Trading
+2025-04-29 22:42:05.607 | INFO     | __main__:main_async:166 - Using mock connector for paper trading
+2025-04-29 22:42:05.607 | INFO     | src.execution.order_manager:__init__:43 - Order manager initialized
+2025-04-29 22:42:05.607 | INFO     | src.risk.risk_manager:__init__:45 - Risk manager initialized
+2025-04-29 22:42:05.607 | INFO     | src.risk.risk_manager:__init__:45 - Risk manager initialized
+2025-04-29 22:42:05.607 | INFO     | src.execution.execution_handler:__init__:55 - Execution handler initialized
+2025-04-29 22:42:05.607 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (SimpleArbitrage) initialized
+2025-04-29 22:42:05.607 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 22:42:05.607 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT'], fee_pct=0.001
+2025-04-29 22:42:05.607 | INFO     | __main__:main_async:210 - System initialized, starting WebSocket client
+2025-04-29 22:42:05.607 | INFO     | src.data.websocket_client:start:409 - Starting WebSocket client
+2025-04-29 22:42:05.607 | INFO     | src.data.websocket_client:connect:51 - Connecting to wss://testnet.binance.vision/ws
+2025-04-29 22:42:07.260 | INFO     | src.data.websocket_client:connect:53 - Connected to WebSocket server
+2025-04-30 00:09:05.889 | INFO     | __main__:main_async:218 - Shutting down ctrader
+2025-04-29 16:13:59.807 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 16:14:01.441 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-29 16:14:01.466 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-29 16:14:01.466 | INFO     | __main__:main_async:160 - Starting ctrader with strategy simple_arbitrage on BTC/USDT
+2025-04-29 16:14:01.466 | INFO     | __main__:main_async:161 - Mode: Paper Trading
+2025-04-29 16:14:01.466 | INFO     | __main__:main_async:166 - Using mock connector for paper trading
+2025-04-29 16:14:01.466 | INFO     | src.execution.order_manager:__init__:43 - Order manager initialized
+2025-04-29 16:14:01.466 | INFO     | src.risk.risk_manager:__init__:45 - Risk manager initialized
+2025-04-29 16:14:01.466 | INFO     | src.risk.risk_manager:__init__:45 - Risk manager initialized
+2025-04-29 16:14:01.466 | INFO     | src.execution.execution_handler:__init__:55 - Execution handler initialized
+2025-04-29 16:14:01.466 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (SimpleArbitrage) initialized
+2025-04-29 16:14:01.466 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-29 16:14:01.466 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT'], fee_pct=0.001
+2025-04-29 16:14:01.466 | INFO     | __main__:main_async:210 - System initialized, starting WebSocket client
+2025-04-29 16:14:01.466 | INFO     | src.data.websocket_client:start:409 - Starting WebSocket client
+2025-04-29 16:14:01.467 | INFO     | src.data.websocket_client:connect:51 - Connecting to wss://testnet.binance.vision/ws
+2025-04-29 16:14:02.256 | INFO     | src.data.websocket_client:connect:53 - Connected to WebSocket server
+2025-04-29 18:58:51.528 | WARNING  | src.data.websocket_client:start:185 - WebSocket connection closed: no close frame received or sent
+2025-04-29 18:58:51.529 | INFO     | src.data.websocket_client:start:194 - Reconnecting in 5 seconds (attempt 1/10)
+2025-04-29 18:58:56.532 | INFO     | src.data.websocket_client:connect:51 - Connecting to wss://testnet.binance.vision/ws
+2025-04-29 18:58:57.243 | INFO     | src.data.websocket_client:connect:53 - Connected to WebSocket server
+2025-04-30 02:40:26.856 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 02:40:27.303 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 02:40:27.313 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 02:40:27.313 | INFO     | __main__:main_async:160 - Starting ctrader with strategy simple_arbitrage on BTC/USDT
+2025-04-30 02:40:27.313 | INFO     | __main__:main_async:161 - Mode: Paper Trading
+2025-04-30 02:40:27.313 | INFO     | __main__:main_async:166 - Using mock connector for paper trading
+2025-04-30 02:40:27.314 | INFO     | src.execution.order_manager:__init__:43 - Order manager initialized
+2025-04-30 02:40:27.314 | INFO     | src.risk.risk_manager:__init__:45 - Risk manager initialized
+2025-04-30 02:40:27.314 | INFO     | src.risk.risk_manager:__init__:45 - Risk manager initialized
+2025-04-30 02:40:27.314 | INFO     | src.execution.execution_handler:__init__:55 - Execution handler initialized
+2025-04-30 02:40:27.314 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (SimpleArbitrage) initialized
+2025-04-30 02:40:27.314 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-30 02:40:27.314 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT'], fee_pct=0.001
+2025-04-30 02:40:27.314 | INFO     | __main__:main_async:210 - System initialized, starting WebSocket client
+2025-04-30 02:40:27.314 | INFO     | src.data.websocket_client:start:409 - Starting WebSocket client
+2025-04-30 02:40:27.314 | INFO     | src.data.websocket_client:connect:51 - Connecting to wss://testnet.binance.vision/ws
+2025-04-30 02:40:29.203 | INFO     | src.data.websocket_client:connect:53 - Connected to WebSocket server
+2025-04-30 03:59:51.005 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 03:59:51.418 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 03:59:51.427 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 03:59:51.427 | INFO     | __main__:main_async:160 - Starting ctrader with strategy simple_arbitrage on BTC/USDT
+2025-04-30 03:59:51.427 | INFO     | __main__:main_async:161 - Mode: Paper Trading
+2025-04-30 03:59:51.427 | INFO     | __main__:main_async:166 - Using mock connector for paper trading
+2025-04-30 03:59:51.428 | INFO     | src.execution.order_manager:__init__:43 - Order manager initialized
+2025-04-30 03:59:51.428 | INFO     | src.risk.risk_manager:__init__:45 - Risk manager initialized
+2025-04-30 03:59:51.428 | INFO     | src.risk.risk_manager:__init__:45 - Risk manager initialized
+2025-04-30 03:59:51.428 | INFO     | src.execution.execution_handler:__init__:55 - Execution handler initialized
+2025-04-30 03:59:51.428 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (SimpleArbitrage) initialized
+2025-04-30 03:59:51.428 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-30 03:59:51.428 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT'], fee_pct=0.001
+2025-04-30 03:59:51.428 | INFO     | __main__:main_async:210 - System initialized, starting WebSocket client
+2025-04-30 03:59:51.428 | INFO     | src.data.websocket_client:start:409 - Starting WebSocket client
+2025-04-30 03:59:51.428 | INFO     | src.data.websocket_client:connect:51 - Connecting to wss://testnet.binance.vision/ws
+2025-04-30 03:59:52.184 | INFO     | src.data.websocket_client:connect:53 - Connected to WebSocket server
+2025-04-30 04:13:00.980 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 04:13:02.957 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 04:13:02.976 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 04:13:02.983 | INFO     | __main__:main_async:164 - Database initialized successfully.
+2025-04-30 04:13:02.983 | INFO     | __main__:main_async:170 - Starting ctrader with strategy simple_arbitrage on BTC/USDT
+2025-04-30 04:13:02.983 | INFO     | __main__:main_async:171 - Mode: Paper Trading
+2025-04-30 04:13:02.983 | INFO     | __main__:main_async:176 - Using mock connector for paper trading
+2025-04-30 04:13:02.984 | INFO     | src.execution.order_manager:__init__:45 - Order manager initialized
+2025-04-30 04:13:02.984 | INFO     | src.risk.risk_manager:__init__:45 - Risk manager initialized
+2025-04-30 04:13:02.984 | INFO     | src.risk.risk_manager:__init__:45 - Risk manager initialized
+2025-04-30 04:13:02.984 | INFO     | src.execution.execution_handler:__init__:57 - Execution handler initialized
+2025-04-30 04:13:02.984 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (SimpleArbitrage) initialized
+2025-04-30 04:13:02.984 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-30 04:13:02.984 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT'], fee_pct=0.001
+2025-04-30 04:13:02.984 | INFO     | __main__:main_async:220 - System initialized, starting WebSocket client
+2025-04-30 04:13:02.984 | INFO     | src.data.websocket_client:start:409 - Starting WebSocket client
+2025-04-30 04:13:02.984 | INFO     | src.data.websocket_client:connect:51 - Connecting to wss://testnet.binance.vision/ws
+2025-04-30 04:13:04.664 | INFO     | src.data.websocket_client:connect:53 - Connected to WebSocket server
+2025-04-30 16:46:57.693 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 16:47:00.045 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 08:49:46.133 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 08:49:48.593 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 08:49:48.614 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 08:49:48.618 | INFO     | __main__:main_async:164 - Database initialized successfully.
+2025-04-30 08:49:48.618 | INFO     | __main__:main_async:170 - Starting ctrader with strategy simple_arbitrage on BTC/USDT
+2025-04-30 08:49:48.618 | INFO     | __main__:main_async:171 - Mode: Paper Trading
+2025-04-30 08:49:48.618 | INFO     | __main__:main_async:176 - Using mock connector for paper trading
+2025-04-30 08:49:48.618 | INFO     | src.execution.order_manager:__init__:45 - Order manager initialized
+2025-04-30 08:49:48.618 | INFO     | src.risk.risk_manager:__init__:45 - Risk manager initialized
+2025-04-30 08:49:48.618 | INFO     | src.risk.risk_manager:__init__:45 - Risk manager initialized
+2025-04-30 08:49:48.618 | INFO     | src.execution.execution_handler:__init__:57 - Execution handler initialized
+2025-04-30 08:49:48.618 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (SimpleArbitrage) initialized
+2025-04-30 08:49:48.618 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-30 08:49:48.618 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT'], fee_pct=0.001
+2025-04-30 08:49:48.618 | INFO     | __main__:main_async:220 - System initialized, starting WebSocket client
+2025-04-30 08:49:48.618 | INFO     | src.data.websocket_client:start:409 - Starting WebSocket client
+2025-04-30 08:49:48.619 | INFO     | src.data.websocket_client:connect:51 - Connecting to wss://testnet.binance.vision/ws
+2025-04-30 08:49:49.334 | INFO     | src.data.websocket_client:connect:53 - Connected to WebSocket server
+2025-04-30 08:51:38.049 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 08:51:40.309 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 08:51:40.328 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 08:51:40.330 | INFO     | __main__:main_async:164 - Database initialized successfully.
+2025-04-30 08:51:40.330 | INFO     | __main__:main_async:170 - Starting ctrader with strategy simple_arbitrage on BTC/USDT
+2025-04-30 08:51:40.330 | INFO     | __main__:main_async:171 - Mode: Paper Trading
+2025-04-30 08:51:40.330 | INFO     | __main__:main_async:176 - Using mock connector for paper trading
+2025-04-30 08:51:40.330 | INFO     | src.execution.order_manager:__init__:45 - Order manager initialized
+2025-04-30 08:51:40.330 | INFO     | src.risk.risk_manager:__init__:45 - Risk manager initialized
+2025-04-30 08:51:40.330 | INFO     | src.risk.risk_manager:__init__:45 - Risk manager initialized
+2025-04-30 08:51:40.330 | INFO     | src.execution.execution_handler:__init__:57 - Execution handler initialized
+2025-04-30 08:51:40.330 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (SimpleArbitrage) initialized
+2025-04-30 08:51:40.330 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-30 08:51:40.330 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT'], fee_pct=0.001
+2025-04-30 08:51:40.330 | INFO     | __main__:main_async:220 - System initialized, starting WebSocket client
+2025-04-30 08:51:40.330 | INFO     | src.data.websocket_client:start:409 - Starting WebSocket client
+2025-04-30 08:51:40.330 | INFO     | src.data.websocket_client:connect:51 - Connecting to wss://testnet.binance.vision/ws
+2025-04-30 08:51:41.037 | INFO     | src.data.websocket_client:connect:53 - Connected to WebSocket server
+2025-04-30 16:52:14.813 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 08:52:26.530 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 08:52:26.962 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 17:03:12.838 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 09:24:43.278 | WARNING  | src.data.websocket_client:start:185 - WebSocket connection closed: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-04-30 09:24:43.280 | INFO     | src.data.websocket_client:start:194 - Reconnecting in 5 seconds (attempt 1/10)
+2025-04-30 09:24:48.291 | INFO     | src.data.websocket_client:connect:51 - Connecting to wss://testnet.binance.vision/ws
+2025-04-30 09:24:49.615 | INFO     | src.data.websocket_client:connect:53 - Connected to WebSocket server
+2025-04-30 18:17:16.054 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 18:17:16.499 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 18:18:18.494 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 18:18:18.865 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 18:19:39.128 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 18:19:39.551 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 18:20:53.005 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 18:20:53.468 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 18:21:43.681 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 18:21:44.105 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 18:22:58.339 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 18:22:58.683 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 18:23:56.823 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 18:23:57.231 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 18:24:50.763 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 18:24:51.126 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 18:25:38.544 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 18:25:38.947 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 18:30:22.792 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 18:30:23.228 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 18:30:36.267 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 18:30:36.761 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 18:31:56.604 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 18:31:57.050 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 18:33:17.181 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 18:33:17.556 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 18:33:27.579 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 18:33:27.911 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 18:34:46.980 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 18:34:47.417 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 18:36:23.714 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 18:36:24.057 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 18:36:24.753 | INFO     | __main__:download_data:454 - Starting data download command...
+2025-04-30 18:36:24.758 | INFO     | __main__:download_data:469 - Using Binance testnet
+2025-04-30 18:36:24.758 | INFO     | __main__:download_data:482 - Downloading data for BTC/USDT (1m) from 2025-04-28 to 2025-04-29...
+2025-04-30 18:36:27.013 | INFO     | __main__:download_data:536 - Successfully saved 1520 data points for BTC/USDT to data/BTC-USDT-1m.csv
+2025-04-30 18:36:27.014 | INFO     | __main__:download_data:482 - Downloading data for ETH/USDT (1m) from 2025-04-28 to 2025-04-29...
+2025-04-30 18:36:27.432 | INFO     | __main__:download_data:536 - Successfully saved 1520 data points for ETH/USDT to data/ETH-USDT-1m.csv
+2025-04-30 18:36:27.432 | INFO     | __main__:download_data:482 - Downloading data for ETH/BTC (1m) from 2025-04-28 to 2025-04-29...
+2025-04-30 18:36:28.038 | INFO     | __main__:download_data:536 - Successfully saved 1520 data points for ETH/BTC to data/ETH-BTC-1m.csv
+2025-04-30 18:36:28.038 | INFO     | __main__:download_data:542 - Data download process finished.
+2025-04-30 12:45:27.292 | WARNING  | src.data.websocket_client:start:185 - WebSocket connection closed: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-04-30 12:45:27.295 | INFO     | src.data.websocket_client:start:194 - Reconnecting in 5 seconds (attempt 2/10)
+2025-04-30 12:45:32.299 | INFO     | src.data.websocket_client:connect:51 - Connecting to wss://testnet.binance.vision/ws
+2025-04-30 12:45:33.619 | INFO     | src.data.websocket_client:connect:53 - Connected to WebSocket server
+2025-04-30 12:46:23.674 | WARNING  | src.data.websocket_client:start:185 - WebSocket connection closed: sent 1011 (internal error) keepalive ping timeout; no close frame received
+2025-04-30 12:46:23.676 | INFO     | src.data.websocket_client:start:194 - Reconnecting in 5 seconds (attempt 3/10)
+2025-04-30 12:46:28.687 | INFO     | src.data.websocket_client:connect:51 - Connecting to wss://testnet.binance.vision/ws
+2025-04-30 12:46:28.734 | ERROR    | src.data.websocket_client:start:199 - WebSocket error: [Errno -3] Temporary failure in name resolution
+2025-04-30 12:46:28.735 | INFO     | src.data.websocket_client:start:208 - Reconnecting in 5 seconds (attempt 4/10)
+2025-04-30 12:46:33.742 | INFO     | src.data.websocket_client:connect:51 - Connecting to wss://testnet.binance.vision/ws
+2025-04-30 12:46:33.760 | ERROR    | src.data.websocket_client:start:199 - WebSocket error: [Errno -3] Temporary failure in name resolution
+2025-04-30 12:46:33.761 | INFO     | src.data.websocket_client:start:208 - Reconnecting in 5 seconds (attempt 5/10)
+2025-04-30 12:46:38.768 | INFO     | src.data.websocket_client:connect:51 - Connecting to wss://testnet.binance.vision/ws
+2025-04-30 12:46:38.785 | ERROR    | src.data.websocket_client:start:199 - WebSocket error: [Errno -3] Temporary failure in name resolution
+2025-04-30 12:46:38.786 | INFO     | src.data.websocket_client:start:208 - Reconnecting in 5 seconds (attempt 6/10)
+2025-04-30 12:46:43.790 | INFO     | src.data.websocket_client:connect:51 - Connecting to wss://testnet.binance.vision/ws
+2025-04-30 12:46:43.835 | ERROR    | src.data.websocket_client:start:199 - WebSocket error: [Errno -3] Temporary failure in name resolution
+2025-04-30 12:46:43.835 | INFO     | src.data.websocket_client:start:208 - Reconnecting in 5 seconds (attempt 7/10)
+2025-04-30 12:46:48.845 | INFO     | src.data.websocket_client:connect:51 - Connecting to wss://testnet.binance.vision/ws
+2025-04-30 12:46:48.857 | ERROR    | src.data.websocket_client:start:199 - WebSocket error: [Errno -3] Temporary failure in name resolution
+2025-04-30 12:46:48.858 | INFO     | src.data.websocket_client:start:208 - Reconnecting in 5 seconds (attempt 8/10)
+2025-04-30 12:46:53.868 | INFO     | src.data.websocket_client:connect:51 - Connecting to wss://testnet.binance.vision/ws
+2025-04-30 12:46:53.894 | ERROR    | src.data.websocket_client:start:199 - WebSocket error: [Errno -3] Temporary failure in name resolution
+2025-04-30 12:46:53.894 | INFO     | src.data.websocket_client:start:208 - Reconnecting in 5 seconds (attempt 9/10)
+2025-04-30 12:46:58.898 | INFO     | src.data.websocket_client:connect:51 - Connecting to wss://testnet.binance.vision/ws
+2025-04-30 12:46:58.903 | ERROR    | src.data.websocket_client:start:199 - WebSocket error: [Errno -3] Temporary failure in name resolution
+2025-04-30 12:46:58.904 | INFO     | src.data.websocket_client:start:208 - Reconnecting in 5 seconds (attempt 10/10)
+2025-04-30 12:47:03.915 | INFO     | src.data.websocket_client:connect:51 - Connecting to wss://testnet.binance.vision/ws
+2025-04-30 12:47:03.929 | ERROR    | src.data.websocket_client:start:199 - WebSocket error: [Errno -3] Temporary failure in name resolution
+2025-04-30 12:47:03.930 | ERROR    | src.data.websocket_client:start:204 - Max reconnect attempts reached (10)
+2025-04-30 12:47:03.930 | ERROR    | src.data.websocket_client:connect:401 - Error connecting to WebSocket: unhashable type: 'dict'
+2025-04-30 12:47:03.931 | INFO     | __main__:main_async:228 - Shutting down ctrader
+2025-04-30 23:04:51.563 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 23:05:13.942 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 15:14:28.236 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 15:14:28.730 | INFO     | src.exchange.binance_connector:__init__:93 - Initialized Binance connector (testnet: True)
+2025-04-30 15:14:28.739 | INFO     | src.utils.logger:setup_logger:53 - Logger initialized with level INFO
+2025-04-30 15:14:28.741 | INFO     | __main__:main_async:164 - Database initialized successfully.
+2025-04-30 15:14:28.741 | INFO     | __main__:main_async:170 - Starting ctrader with strategy simple_arbitrage on BTC/USDT
+2025-04-30 15:14:28.741 | INFO     | __main__:main_async:171 - Mode: Paper Trading
+2025-04-30 15:14:28.741 | INFO     | __main__:main_async:176 - Using mock connector for paper trading
+2025-04-30 15:14:28.741 | INFO     | src.execution.order_manager:__init__:45 - Order manager initialized
+2025-04-30 15:14:28.741 | INFO     | src.risk.risk_manager:__init__:45 - Risk manager initialized
+2025-04-30 15:14:28.741 | INFO     | src.risk.risk_manager:__init__:45 - Risk manager initialized
+2025-04-30 15:14:28.741 | INFO     | src.execution.execution_handler:__init__:57 - Execution handler initialized
+2025-04-30 15:14:28.741 | INFO     | src.strategies.base_strategy:__init__:43 - Strategy SimpleArbitrageStrategy (SimpleArbitrage) initialized
+2025-04-30 15:14:28.741 | INFO     | src.strategies.arbitrage_strategy:initialize:26 - Initializing SimpleArbitrageStrategy
+2025-04-30 15:14:28.741 | INFO     | src.strategies.arbitrage_strategy:initialize:40 - Strategy configured with: min_profit_threshold=0.001, max_trade_amount=100, symbols=['BTC/USDT'], fee_pct=0.001
+2025-04-30 15:14:28.741 | INFO     | __main__:main_async:220 - System initialized, starting WebSocket client
+2025-04-30 15:14:28.741 | INFO     | src.data.websocket_client:start:409 - Starting WebSocket client
+2025-04-30 15:14:28.741 | INFO     | src.data.websocket_client:connect:51 - Connecting to wss://testnet.binance.vision/ws
+2025-04-30 15:14:33.807 | INFO     | src.data.websocket_client:connect:53 - Connected to WebSocket server

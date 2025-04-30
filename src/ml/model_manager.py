@@ -1,86 +1,119 @@
 """Model management for ML models in ctrader."""
 
+import os
+import joblib
 from typing import Dict, Any, Optional
-
-from src.utils.config import config_manager
-from src.utils.logger import get_logger
 
 
 class ModelManager:
-    """Model manager for loading and using ML models.
+    """Manages loading, saving, and predicting with ML models.
     
-    This class is responsible for loading ML models and making predictions.
+    This class is responsible for saving and loading ML models to/from disk,
+    and making predictions using the loaded model.
     
     Attributes:
-        config: Configuration manager
-        logger: Logger instance
+        model_dir: Directory where models are stored
+        model: The currently loaded model (None if no model is loaded)
     """
     
-    def __init__(
-        self,
-        config=None,
-        logger=None,
-    ):
-        """Initialize the model manager.
+    def __init__(self, model_dir: str = './models'):
+        """Initialize the ModelManager.
         
         Args:
-            config: Configuration manager (default: global config_manager)
-            logger: Logger instance (default: create new logger)
+            model_dir: Directory where models are stored (default: './models')
         """
-        self.config = config or config_manager
-        self.logger = logger or get_logger("ml.model_manager")
+        self.model_dir = model_dir
+        self.model: Optional[Any] = None
         
-        # Load model configuration
-        self.model_config = self.config.get("ml", {}).get("models", {})
-        self.model_dir = self.model_config.get("model_dir", "models")
-        
-        self.logger.info("Model manager initialized")
-        self.logger.debug(f"Model config: {self.model_config}")
+        try:
+            os.makedirs(self.model_dir, exist_ok=True)
+            print(f"Model directory set to: {self.model_dir}")
+        except OSError as e:
+            print(f"Error creating model directory {self.model_dir}: {e}")
     
-    def load_model(self, model_name_or_path: str) -> Any:
-        """Load a model from the specified path or by name.
-        
-        Currently, this method logs the action and returns a dummy model object.
-        In the future, it will implement actual model loading logic.
+    def save_model(self, model: Any, model_name: str) -> None:
+        """Saves a trained model to disk.
         
         Args:
-            model_name_or_path: Model name or path
+            model: The model object to save
+            model_name: Name to use for the saved model file (without extension)
+        """
+        if model is None:
+            print("Attempted to save a None model.")
+            return
+        
+        file_path = os.path.join(self.model_dir, f"{model_name}.joblib")
+        try:
+            joblib.dump(model, file_path)
+            print(f"Model '{model_name}' saved successfully to {file_path}")
+        except Exception as e:
+            print(f"Error saving model '{model_name}' to {file_path}: {e}")
+    
+    def load_model(self, model_name: str) -> bool:
+        """Loads a model from disk.
+        
+        Args:
+            model_name: Name of the model to load (without extension)
             
         Returns:
-            Loaded model object (currently a dummy object)
+            True if the model was loaded successfully, False otherwise
         """
-        self.logger.debug(f"Loading model: {model_name_or_path}")
+        file_path = os.path.join(self.model_dir, f"{model_name}.joblib")
+        if not os.path.exists(file_path):
+            print(f"Model file not found: {file_path}")
+            self.model = None
+            return False
         
-        # In the future, this method will:
-        # 1. Determine the model type
-        # 2. Load the model from disk
-        # 3. Initialize the model with appropriate parameters
-        # 4. Return the loaded model
-        
-        # For now, return a dummy model object
-        dummy_model = {"name": model_name_or_path, "type": "dummy"}
-        return dummy_model
+        try:
+            self.model = joblib.load(file_path)
+            print(f"Model '{model_name}' loaded successfully from {file_path}")
+            return True
+        except Exception as e:
+            print(f"Error loading model '{model_name}' from {file_path}: {e}")
+            self.model = None
+            return False
     
-    def predict(self, model: Any, features: Dict[str, Any]) -> Dict[str, Any]:
-        """Make predictions using the specified model and features.
-        
-        Currently, this method logs the action and returns a dummy prediction.
-        In the future, it will implement actual prediction logic.
+    def predict(self, features: Dict[str, float]) -> Optional[Any]:
+        """Makes a prediction using the loaded model.
         
         Args:
-            model: Model object
-            features: Dictionary of features
+            features: Dictionary of features to use for prediction
             
         Returns:
-            Dictionary containing prediction results
+            Prediction result, or None if no model is loaded or an error occurs
         """
-        self.logger.debug(f"Making prediction with model {model} using features: {features}")
+        if self.model is None:
+            print("No model loaded. Cannot make prediction.")
+            return None
         
-        # In the future, this method will:
-        # 1. Preprocess features for the model
-        # 2. Run the model to get predictions
-        # 3. Postprocess the predictions
-        # 4. Return the results
-        
-        # For now, return a dummy prediction
-        return {"prediction": 0.5, "confidence": 0.9}
+        try:
+            # ** Placeholder **
+            # In a real scenario, you would prepare features and predict:
+            # feature_vector = self._prepare_features(features)
+            # prediction = self.model.predict(feature_vector)
+            # return prediction[0]  # Assuming single prediction
+            
+            print(f"Predicting with placeholder logic for features: {features}")
+            # Return a dummy value for now
+            return 0.5  # Example dummy prediction
+            
+        except Exception as e:
+            print(f"Error during prediction: {e}")
+            return None
+
+
+# Example usage (for testing)
+if __name__ == '__main__':
+    mm = ModelManager()
+    # Example: Create a dummy model (e.g., from sklearn)
+    # from sklearn.linear_model import LogisticRegression
+    # dummy_model = LogisticRegression()
+    # mm.save_model(dummy_model, 'dummy_model_v1')
+    
+    loaded = mm.load_model('dummy_model_v1')
+    if loaded:
+        sample_features = {'spread': 0.1, 'mid_price': 100.5}
+        prediction = mm.predict(sample_features)
+        print(f"Sample Prediction: {prediction}")
+    else:
+        print("Failed to load dummy model.")

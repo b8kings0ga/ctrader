@@ -24,6 +24,14 @@ class TestOrderManager(unittest.TestCase):
             exchange_connector=self.mock_exchange_connector,
         )
         
+        # Patch the save_execution function
+        self.patcher = patch('src.execution.order_manager.save_execution')
+        self.mock_save_execution = self.patcher.start()
+        
+    def tearDown(self):
+        """Tear down test fixtures."""
+        self.patcher.stop()
+        
     def test_create_order_success(self):
         """Test creating an order successfully."""
         # Mock exchange connector response
@@ -76,6 +84,17 @@ class TestOrderManager(unittest.TestCase):
         # Verify order was added to active orders
         self.assertIn("test_order_id", self.order_manager.active_orders)
         
+        # Verify save_execution was called with correct parameters
+        self.mock_save_execution.assert_called_once()
+        execution_data = self.mock_save_execution.call_args[0][0]
+        self.assertEqual(execution_data['order_id'], "test_order_id")
+        self.assertEqual(execution_data['symbol'], "BTC/USDT")
+        self.assertEqual(execution_data['side'], "buy")
+        self.assertEqual(execution_data['type'], "limit")
+        self.assertEqual(execution_data['quantity_requested'], 1.0)
+        self.assertEqual(execution_data['price'], 50000.0)
+        self.assertEqual(execution_data['status'], "new")
+        
     def test_create_order_failure(self):
         """Test creating an order with failure."""
         # Mock exchange connector to raise an exception
@@ -99,13 +118,31 @@ class TestOrderManager(unittest.TestCase):
         # Verify error was logged
         self.mock_logger.error.assert_called_once()
         
+        # Verify save_execution was called with error status
+        self.mock_save_execution.assert_called_once()
+        execution_data = self.mock_save_execution.call_args[0][0]
+        self.assertEqual(execution_data['symbol'], "BTC/USDT")
+        self.assertEqual(execution_data['side'], "buy")
+        self.assertEqual(execution_data['type'], "limit")
+        self.assertEqual(execution_data['quantity_requested'], 1.0)
+        self.assertEqual(execution_data['price'], 50000.0)
+        self.assertEqual(execution_data['status'], "error")
+        
     def test_cancel_order_success(self):
         """Test cancelling an order successfully."""
         # Mock exchange connector response
         self.mock_exchange_connector.cancel_order.return_value = {"id": "test_order_id", "status": "canceled"}
         
         # Add order to active orders
-        self.order_manager.active_orders["test_order_id"] = {"id": "test_order_id", "status": "open"}
+        self.order_manager.active_orders["test_order_id"] = {
+            "id": "test_order_id",
+            "status": "open",
+            "side": "buy",
+            "type": "limit",
+            "amount": 1.0,
+            "price": 50000.0,
+            "symbol": "BTC/USDT"
+        }
         
         # Call cancel_order
         result = self.order_manager.cancel_order("test_order_id", "BTC/USDT")
@@ -118,6 +155,13 @@ class TestOrderManager(unittest.TestCase):
         
         # Verify order was removed from active orders
         self.assertNotIn("test_order_id", self.order_manager.active_orders)
+        
+        # Verify save_execution was called with canceled status
+        self.mock_save_execution.assert_called_once()
+        execution_data = self.mock_save_execution.call_args[0][0]
+        self.assertEqual(execution_data['order_id'], "test_order_id")
+        self.assertEqual(execution_data['symbol'], "BTC/USDT")
+        self.assertEqual(execution_data['status'], "canceled")
         
     def test_cancel_order_failure(self):
         """Test cancelling an order with failure."""
@@ -138,6 +182,13 @@ class TestOrderManager(unittest.TestCase):
         
         # Verify error was logged
         self.mock_logger.error.assert_called_once()
+        
+        # Verify save_execution was called with error status
+        self.mock_save_execution.assert_called_once()
+        execution_data = self.mock_save_execution.call_args[0][0]
+        self.assertEqual(execution_data['order_id'], "test_order_id")
+        self.assertEqual(execution_data['symbol'], "BTC/USDT")
+        self.assertEqual(execution_data['status'], "cancel_error")
         
     def test_get_order_status_from_cache(self):
         """Test getting order status from cache."""
@@ -204,6 +255,19 @@ class TestOrderManager(unittest.TestCase):
         
         # Verify order was added to active orders
         self.assertIn("new_order_id", self.order_manager.active_orders)
+        
+        # Verify save_execution was called twice (once for each update)
+        self.assertEqual(self.mock_save_execution.call_count, 2)
+        
+        # Check first call (closed status)
+        first_call_args = self.mock_save_execution.call_args_list[0][0][0]
+        self.assertEqual(first_call_args['order_id'], "test_order_id")
+        self.assertEqual(first_call_args['status'], "closed")
+        
+        # Check second call (open status)
+        second_call_args = self.mock_save_execution.call_args_list[1][0][0]
+        self.assertEqual(second_call_args['order_id'], "new_order_id")
+        self.assertEqual(second_call_args['status'], "open")
 
 
 if __name__ == "__main__":

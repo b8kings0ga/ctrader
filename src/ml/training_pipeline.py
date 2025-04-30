@@ -1,151 +1,155 @@
 """Training pipeline for ML models in ctrader."""
 
-from typing import Dict, Any, Optional, List, Tuple
+import pandas as pd
+from sklearn.model_selection import train_test_split
+# from sklearn.linear_model import LogisticRegression  # Example model
+# from sklearn.metrics import accuracy_score  # Example metric
+from typing import Any, Dict, Tuple, Optional
+import logging
 
-from src.utils.config import config_manager
-from src.utils.logger import get_logger
+from .feature_engineering import FeatureEngineering
+from .model_manager import ModelManager
+
+logger = logging.getLogger(__name__)
+# logging.basicConfig(level=logging.INFO)  # Basic config if needed
 
 
 class TrainingPipeline:
-    """Training pipeline for ML models.
-    
-    This class is responsible for training ML models.
-    
-    Attributes:
-        config: Configuration manager
-        logger: Logger instance
-    """
-    
-    def __init__(
-        self,
-        config=None,
-        logger=None,
-    ):
-        """Initialize the training pipeline.
+    """Orchestrates the ML model training process."""
+
+    def __init__(self, config: Dict[str, Any]):
+        """Initializes the TrainingPipeline.
         
         Args:
-            config: Configuration manager (default: global config_manager)
-            logger: Logger instance (default: create new logger)
+            config: Dictionary containing configuration parameters
         """
-        self.config = config or config_manager
-        self.logger = logger or get_logger("ml.training_pipeline")
-        
-        # Load training configuration
-        self.training_config = self.config.get("ml", {}).get("training", {})
-        self.data_dir = self.training_config.get("data_dir", "data")
-        self.model_dir = self.training_config.get("model_dir", "models")
-        
-        self.logger.info("Training pipeline initialized")
-        self.logger.debug(f"Training config: {self.training_config}")
-    
-    def load_data(self) -> Tuple[Dict[str, Any], Dict[str, Any]]:
-        """Load training and validation data.
-        
-        Currently, this method logs the action and returns empty dictionaries.
-        In the future, it will implement actual data loading logic.
+        self.config = config
+        self.data_path = config.get('data_path', 'data/historical_data.csv')  # Example config
+        self.model_name = config.get('model_name', 'default_model')
+        self.test_size = config.get('test_size', 0.2)
+        self.random_state = config.get('random_state', 42)
+
+        self.feature_engineer = FeatureEngineering()
+        self.model_manager = ModelManager(model_dir=config.get('model_dir', './models'))
+
+        logger.info("Training Pipeline initialized.")
+
+    def _load_data(self) -> pd.DataFrame:
+        """Loads raw data for training.
         
         Returns:
-            Tuple of (training_data, validation_data)
+            DataFrame containing the loaded data
         """
-        self.logger.info("Loading training and validation data")
-        
-        # In the future, this method will:
-        # 1. Load data from files or databases
-        # 2. Split into training and validation sets
-        # 3. Return the data
-        
-        # For now, return empty dictionaries
-        return {}, {}
-    
-    def preprocess_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        """Preprocess data for training.
-        
-        Currently, this method logs the action and returns the input data.
-        In the future, it will implement actual data preprocessing logic.
+        logger.info(f"Loading data from {self.data_path}...")
+        # Placeholder: Implement actual data loading (e.g., pd.read_csv)
+        # For now:
+        # return pd.DataFrame()  # Or raise error
+        raise NotImplementedError("Data loading not implemented yet.")
+
+    def _preprocess_data(self, data: pd.DataFrame) -> Tuple[pd.DataFrame, pd.Series]:
+        """Preprocesses data, generates features, and creates target variable.
         
         Args:
-            data: Raw data
+            data: Raw data as a DataFrame
             
         Returns:
-            Preprocessed data
+            Tuple of (features_df, target_series)
         """
-        self.logger.info("Preprocessing data")
-        
-        # In the future, this method will:
-        # 1. Clean the data
-        # 2. Handle missing values
-        # 3. Normalize/standardize features
-        # 4. Encode categorical variables
-        
-        # For now, return the input data
-        return data
-    
-    def train_model(self, training_data: Dict[str, Any], validation_data: Dict[str, Any]) -> Any:
-        """Train a model using the provided data.
-        
-        Currently, this method logs the action and returns a dummy model.
-        In the future, it will implement actual model training logic.
+        logger.info("Preprocessing data and generating features...")
+        # Placeholder: Implement data cleaning, feature generation using self.feature_engineer,
+        # and define the target variable 'y'.
+        # For now:
+        # X = pd.DataFrame()
+        # y = pd.Series()
+        # return X, y
+        raise NotImplementedError("Data preprocessing not implemented yet.")
+
+    def _train_model(self, X_train: pd.DataFrame, y_train: pd.Series) -> Optional[Any]:
+        """Trains the machine learning model.
         
         Args:
-            training_data: Training data
-            validation_data: Validation data
+            X_train: Training features
+            y_train: Training target variable
             
         Returns:
-            Trained model
+            Trained model object or None if training fails
         """
-        self.logger.info("Training model")
-        
-        # In the future, this method will:
-        # 1. Initialize a model with appropriate architecture
-        # 2. Train the model on the training data
-        # 3. Validate the model on the validation data
-        # 4. Return the trained model
-        
-        # For now, return a dummy model
-        return {"type": "dummy_model"}
-    
-    def evaluate_model(self, model: Any, test_data: Dict[str, Any]) -> Dict[str, float]:
-        """Evaluate a model on test data.
-        
-        Currently, this method logs the action and returns dummy metrics.
-        In the future, it will implement actual model evaluation logic.
+        logger.info("Training model...")
+        # Placeholder: Instantiate and train a specific model
+        # model = LogisticRegression()
+        # model.fit(X_train, y_train)
+        # return model
+        raise NotImplementedError("Model training not implemented yet.")
+        # Return None  # Or return a dummy trained model for structure testing
+
+    def _evaluate_model(self, model: Any, X_test: pd.DataFrame, y_test: pd.Series) -> Dict[str, float]:
+        """Evaluates the trained model.
         
         Args:
-            model: Trained model
-            test_data: Test data
+            model: Trained model object
+            X_test: Test features
+            y_test: Test target variable
             
         Returns:
             Dictionary of evaluation metrics
         """
-        self.logger.info("Evaluating model")
-        
-        # In the future, this method will:
-        # 1. Make predictions on the test data
-        # 2. Calculate evaluation metrics
-        # 3. Return the metrics
-        
-        # For now, return dummy metrics
-        return {"accuracy": 0.85, "precision": 0.8, "recall": 0.75, "f1": 0.77}
-    
-    def save_model(self, model: Any, model_name: str) -> str:
-        """Save a model to disk.
-        
-        Currently, this method logs the action and returns a dummy path.
-        In the future, it will implement actual model saving logic.
-        
-        Args:
-            model: Trained model
-            model_name: Name to save the model as
-            
-        Returns:
-            Path to the saved model
-        """
-        self.logger.info(f"Saving model as {model_name}")
-        
-        # In the future, this method will:
-        # 1. Serialize the model
-        # 2. Save the model to disk
-        # 3. Return the path to the saved model
-        
-        # For now, return a dummy path
-        return f"{self.model_dir}/{model_name}"
+        if model is None:
+            logger.warning("No model to evaluate.")
+            return {}
+        logger.info("Evaluating model...")
+        # Placeholder: Make predictions and calculate metrics
+        # y_pred = model.predict(X_test)
+        # metrics = {'accuracy': accuracy_score(y_test, y_pred)}
+        # return metrics
+        raise NotImplementedError("Model evaluation not implemented yet.")
+        # Return {'placeholder_metric': 0.0}  # Or return dummy metrics
+
+    def run(self) -> None:
+        """Runs the complete training pipeline."""
+        logger.info("Starting training pipeline run...")
+        try:
+            # 1. Load Data
+            raw_data = self._load_data()
+
+            # 2. Preprocess Data
+            X, y = self._preprocess_data(raw_data)
+
+            # 3. Split Data
+            logger.info(f"Splitting data into train/test sets (test_size={self.test_size})...")
+            X_train, X_test, y_train, y_test = train_test_split(
+                X, y, test_size=self.test_size, random_state=self.random_state  # Add stratify=y if classification
+            )
+            logger.info(f"Train set size: {X_train.shape[0]}, Test set size: {X_test.shape[0]}")
+
+            # 4. Train Model
+            model = self._train_model(X_train, y_train)
+
+            # 5. Evaluate Model
+            evaluation_results = self._evaluate_model(model, X_test, y_test)
+            logger.info(f"Model Evaluation Results: {evaluation_results}")
+
+            # 6. Save Model (if successful)
+            if model is not None:  # Add more sophisticated check based on evaluation if needed
+                logger.info(f"Saving trained model as '{self.model_name}'...")
+                self.model_manager.save_model(model, self.model_name)
+            else:
+                logger.warning("Model training failed or skipped. Model not saved.")
+
+            logger.info("Training pipeline run finished.")
+
+        except NotImplementedError as nie:
+            logger.error(f"Pipeline halted: {nie}")
+        except Exception as e:
+            logger.exception(f"An error occurred during the training pipeline run: {e}")
+
+
+# Example usage (for testing structure)
+# if __name__ == '__main__':
+#     # Example config - replace with actual loading from file/dict
+#     pipeline_config = {
+#         'data_path': 'path/to/your/data.csv',
+#         'model_name': 'arbitrage_predictor_v1',
+#         'test_size': 0.2
+#     }
+#     pipeline = TrainingPipeline(pipeline_config)
+#     # pipeline.run()  # This will raise NotImplementedError until methods are filled

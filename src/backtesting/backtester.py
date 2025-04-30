@@ -94,9 +94,13 @@ class Backtester:
             timeframe=timeframe,
         )
         
-        # Step 2: Initialize strategy
+        # Step 2: Initialize strategy with market simulator as both exchange connector and execution handler
         self.logger.info("Initializing strategy...")
-        self.strategy.initialize()
+        self.strategy.initialize(
+            exchange_connector=self.market_simulator,
+            data_cache=None,  # Strategy should handle None data_cache
+            execution_handler=self.market_simulator
+        )
         
         # Step 3: Replay data and process each tick
         self.logger.info("Starting data replay and strategy execution...")
@@ -105,9 +109,13 @@ class Backtester:
             self.logger.debug(f"Processing tick: {tick_data}")
             self.market_simulator.process_tick(tick_data)
             
-            # Generate signals from the strategy
+            # Generate signals from the strategy (now returned by on_tick)
             self.logger.debug("Generating signals from strategy...")
             signals = self.strategy.on_tick(tick_data)
+            
+            # Ensure signals is iterable (it should be a list)
+            if signals is None:
+                signals = []
             
             # Process signals and simulate order execution
             for signal in signals:

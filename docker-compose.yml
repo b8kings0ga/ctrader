@@ -1,0 +1,18 @@
+services:
+  ctrader:
+    build: .
+    container_name: ctrader_app
+    volumes:
+      # Mount logs directory for persistence
+      - ./logs:/app/logs
+      # Mount config directory to easily modify config outside the container
+      - ./config:/app/config
+      # Mount models directory (if ML models are saved/loaded here)
+      - ./models:/app/models
+      # Mount database directory for persistence
+      - ./database:/app/database
+    # The command is inherited from the Dockerfile's CMD ["run"]
+    # You can override it here if needed, e.g., to pass arguments:
+    # command: ["run", "--strategy", "my_strategy", "--symbol", "ETH/BTC"]
+    # Keep container running even if the main process exits (useful for debugging)
+    # tty: true

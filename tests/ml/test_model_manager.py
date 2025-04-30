@@ -1,7 +1,8 @@
 """Tests for the model manager module."""
 
+import os
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch, mock_open
 
 from src.ml.model_manager import ModelManager
 
@@ -9,68 +10,125 @@ from src.ml.model_manager import ModelManager
 class TestModelManager(unittest.TestCase):
     """Test cases for the ModelManager class."""
     
-    def setUp(self):
+    @patch('os.makedirs')
+    def setUp(self, mock_makedirs):
         """Set up test fixtures."""
-        # Create mock dependencies
-        self.mock_config = MagicMock()
-        self.mock_logger = MagicMock()
+        # Create model manager with test directory
+        self.test_model_dir = './test_models'
+        self.model_manager = ModelManager(model_dir=self.test_model_dir)
         
-        # Configure mock config
-        self.mock_config.get.return_value = {
-            "models": {
-                "model_dir": "models"
-            }
-        }
-        
-        # Create model manager with mock dependencies
-        self.model_manager = ModelManager(
-            config=self.mock_config,
-            logger=self.mock_logger,
-        )
-        
+        # Verify directory creation
+        mock_makedirs.assert_called_once_with(self.test_model_dir, exist_ok=True)
+    
     def test_initialization(self):
         """Test model manager initialization."""
-        # Verify config was accessed
-        self.mock_config.get.assert_called_once_with("ml", {})
+        # Verify model directory was set
+        self.assertEqual(self.model_manager.model_dir, self.test_model_dir)
         
-        # Verify model directory was loaded
-        self.assertEqual(self.model_manager.model_dir, "models")
+        # Verify model is None initially
+        self.assertIsNone(self.model_manager.model)
+    
+    @patch('joblib.dump')
+    def test_save_model(self, mock_dump):
+        """Test saving a model."""
+        # Create a dummy model
+        dummy_model = {"type": "dummy_model"}
+        model_name = "test_model"
         
-        # Verify logger was called
-        self.mock_logger.info.assert_called_once()
-        self.mock_logger.debug.assert_called_once()
+        # Call save_model
+        self.model_manager.save_model(dummy_model, model_name)
         
-    def test_load_model(self):
-        """Test loading a model."""
+        # Verify joblib.dump was called with correct arguments
+        expected_path = os.path.join(self.test_model_dir, f"{model_name}.joblib")
+        mock_dump.assert_called_once_with(dummy_model, expected_path)
+    
+    @patch('os.path.exists')
+    @patch('joblib.load')
+    def test_load_model_success(self, mock_load, mock_exists):
+        """Test loading a model successfully."""
+        # Configure mocks
+        mock_exists.return_value = True
+        dummy_model = {"type": "dummy_model"}
+        mock_load.return_value = dummy_model
+        
         # Call load_model
-        model = self.model_manager.load_model("test_model")
+        model_name = "test_model"
+        result = self.model_manager.load_model(model_name)
         
-        # Verify logger was called
-        self.mock_logger.debug.assert_called_with("Loading model: test_model")
+        # Verify os.path.exists was called with correct path
+        expected_path = os.path.join(self.test_model_dir, f"{model_name}.joblib")
+        mock_exists.assert_called_once_with(expected_path)
         
-        # Verify model is returned
-        self.assertIsInstance(model, dict)
-        self.assertEqual(model["name"], "test_model")
-        self.assertEqual(model["type"], "dummy")
+        # Verify joblib.load was called with correct path
+        mock_load.assert_called_once_with(expected_path)
         
-    def test_predict(self):
-        """Test making predictions."""
-        # Create a dummy model and features
-        model = {"name": "test_model", "type": "dummy"}
-        features = {"feature1": 1.0, "feature2": 2.0}
+        # Verify result is True
+        self.assertTrue(result)
+        
+        # Verify model was stored
+        self.assertEqual(self.model_manager.model, dummy_model)
+    
+    @patch('os.path.exists')
+    def test_load_model_file_not_found(self, mock_exists):
+        """Test loading a model when file doesn't exist."""
+        # Configure mock
+        mock_exists.return_value = False
+        
+        # Call load_model
+        model_name = "nonexistent_model"
+        result = self.model_manager.load_model(model_name)
+        
+        # Verify os.path.exists was called with correct path
+        expected_path = os.path.join(self.test_model_dir, f"{model_name}.joblib")
+        mock_exists.assert_called_once_with(expected_path)
+        
+        # Verify result is False
+        self.assertFalse(result)
+        
+        # Verify model is None
+        self.assertIsNone(self.model_manager.model)
+    
+    @patch('os.path.exists')
+    @patch('joblib.load')
+    def test_load_model_exception(self, mock_load, mock_exists):
+        """Test loading a model when an exception occurs."""
+        # Configure mocks
+        mock_exists.return_value = True
+        mock_load.side_effect = Exception("Test exception")
+        
+        # Call load_model
+        model_name = "test_model"
+        result = self.model_manager.load_model(model_name)
+        
+        # Verify result is False
+        self.assertFalse(result)
+        
+        # Verify model is None
+        self.assertIsNone(self.model_manager.model)
+    
+    def test_predict_no_model(self):
+        """Test predicting when no model is loaded."""
+        # Ensure no model is loaded
+        self.model_manager.model = None
         
         # Call predict
-        prediction = self.model_manager.predict(model, features)
+        features = {"feature1": 1.0, "feature2": 2.0}
+        prediction = self.model_manager.predict(features)
         
-        # Verify logger was called
-        self.mock_logger.debug.assert_called_with(
-            f"Making prediction with model {model} using features: {features}"
-        )
+        # Verify prediction is None
+        self.assertIsNone(prediction)
+    
+    def test_predict_with_model(self):
+        """Test predicting with a loaded model."""
+        # Set a dummy model
+        self.model_manager.model = {"type": "dummy_model"}
         
-        # Verify prediction is returned
-        self.assertIsInstance(prediction, dict)
-        self.assertIn("prediction", prediction)
-        self.assertIn("confidence", prediction)
+        # Call predict
+        features = {"feature1": 1.0, "feature2": 2.0}
+        prediction = self.model_manager.predict(features)
+        
+        # Verify prediction is returned (should be 0.5 for the placeholder implementation)
+        self.assertEqual(prediction, 0.5)
 
 
 if __name__ == "__main__":

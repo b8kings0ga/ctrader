@@ -10,13 +10,18 @@ from src.strategies import BaseStrategy
 class ConcreteStrategy(BaseStrategy):
     """Concrete strategy for testing."""
     
-    def initialize(self, exchange_connector, data_cache):
+    def initialize(self, exchange_connector, data_cache, execution_handler=None):
         """Initialize the strategy."""
         self.exchange = exchange_connector
         self.data_cache = data_cache
+        self.execution_handler = execution_handler
         
     def on_tick(self, market_data):
         """Process a market data tick."""
+        pass
+        
+    def on_trade(self, trade):
+        """Process a trade update."""
         pass
         
     def on_order_update(self, order_update):
@@ -94,14 +99,16 @@ class TestBaseStrategy(unittest.TestCase):
         # Create mock components
         mock_exchange = MagicMock()
         mock_data_cache = MagicMock()
+        mock_execution_handler = MagicMock()
         
         # Initialize a strategy
         strategy = ConcreteStrategy("test_strategy")
-        strategy.initialize(mock_exchange, mock_data_cache)
+        strategy.initialize(mock_exchange, mock_data_cache, mock_execution_handler)
         
         # Check that the components are set correctly
         self.assertEqual(strategy.exchange, mock_exchange)
         self.assertEqual(strategy.data_cache, mock_data_cache)
+        self.assertEqual(strategy.execution_handler, mock_execution_handler)
 
 
 if __name__ == "__main__":

@@ -1,10 +1,12 @@
 """Order manager for ctrader execution engine."""
 
 from typing import Any, Dict, List, Optional, Union
+import json
 
 from src.exchange.binance_connector import OrderRequest, OrderResponse, binance_connector
 from src.utils.config import config_manager
 from src.utils.logger import get_logger
+from src.database.utils import save_execution
 
 
 class OrderManager:
@@ -82,11 +84,51 @@ class OrderManager:
             # Store order in local state
             self.active_orders[order_response.id] = order_response.dict()
             
+            # Prepare execution data for database
+            execution_data = {
+                'order_id': order_response.id,
+                'client_order_id': order_response.client_order_id if hasattr(order_response, 'client_order_id') else None,
+                'symbol': symbol,
+                'side': side,
+                'type': type,
+                'quantity_requested': quantity,
+                'quantity_executed': 0.0,  # Initial execution quantity is 0
+                'price': price,
+                'status': 'new',
+                'exchange_response': order_response.dict()
+            }
+            
+            # Save execution to database
+            try:
+                save_execution(execution_data)
+                self.logger.debug(f"Order execution saved to database: {order_response.id}")
+            except Exception as db_e:
+                self.logger.error(f"Failed to save execution to database: {db_e}", exc_info=True)
+            
             self.logger.info(f"Order created successfully: {order_response.id}")
             return order_response.id
             
         except Exception as e:
             self.logger.error(f"Error creating order: {e}")
+            
+            # Save failed execution to database
+            try:
+                execution_data = {
+                    'order_id': None,
+                    'client_order_id': None,
+                    'symbol': symbol,
+                    'side': side,
+                    'type': type,
+                    'quantity_requested': quantity,
+                    'price': price,
+                    'status': 'error',
+                    'exchange_response': str(e)
+                }
+                save_execution(execution_data)
+                self.logger.debug("Failed order execution saved to database")
+            except Exception as db_e:
+                self.logger.error(f"Failed to save failed execution to database: {db_e}", exc_info=True)
+                
             return None
             
     def cancel_order(self, order_id: str, symbol: str) -> bool:
@@ -105,13 +147,45 @@ class OrderManager:
             
             # Remove from active orders if cancellation was successful
             if order_id in self.active_orders:
+                order_data = self.active_orders[order_id]
                 del self.active_orders[order_id]
+                
+                # Save cancellation to database
+                try:
+                    execution_data = {
+                        'order_id': order_id,
+                        'symbol': symbol,
+                        'side': order_data.get('side'),
+                        'type': order_data.get('type'),
+                        'quantity_requested': order_data.get('amount'),
+                        'price': order_data.get('price'),
+                        'status': 'canceled',
+                        'exchange_response': json.dumps(result) if isinstance(result, dict) else str(result)
+                    }
+                    save_execution(execution_data)
+                    self.logger.debug(f"Order cancellation saved to database: {order_id}")
+                except Exception as db_e:
+                    self.logger.error(f"Failed to save cancellation to database: {db_e}", exc_info=True)
                 
             self.logger.info(f"Order {order_id} cancelled successfully")
             return True
             
         except Exception as e:
             self.logger.error(f"Error cancelling order {order_id}: {e}")
+            
+            # Save failed cancellation to database
+            try:
+                execution_data = {
+                    'order_id': order_id,
+                    'symbol': symbol,
+                    'status': 'cancel_error',
+                    'exchange_response': str(e)
+                }
+                save_execution(execution_data)
+                self.logger.debug(f"Failed cancellation saved to database: {order_id}")
+            except Exception as db_e:
+                self.logger.error(f"Failed to save failed cancellation to database: {db_e}", exc_info=True)
+                
             return False
             
     def get_order_status(self, order_id: str, symbol: str) -> Dict[str, Any]:
@@ -182,6 +256,25 @@ class OrderManager:
             
         status = order_update.get("status")
         
+        # Prepare execution data for database
+        try:
+            execution_data = {
+                'order_id': order_id,
+                'symbol': order_update.get('symbol'),
+                'side': order_update.get('side'),
+                'type': order_update.get('type'),
+                'quantity_requested': order_update.get('amount'),
+                'quantity_executed': order_update.get('filled', 0.0),
+                'price': order_update.get('price'),
+                'average_fill_price': order_update.get('average', order_update.get('price')),
+                'status': status.lower() if status else 'unknown',
+                'exchange_response': json.dumps(order_update) if isinstance(order_update, dict) else str(order_update)
+            }
+            save_execution(execution_data)
+            self.logger.debug(f"Order update saved to database: {order_id}, status: {status}")
+        except Exception as db_e:
+            self.logger.error(f"Failed to save order update to database: {db_e}", exc_info=True)
+        
         if status in ["closed", "canceled", "expired", "rejected"]:
             # Remove from active orders if it's no longer active
             if order_id in self.active_orders:
@@ -191,3 +284,37 @@ class OrderManager:
             # Update or add to active orders
             self.logger.debug(f"Updating local state for order {order_id} (status: {status})")
             self.active_orders[order_id] = order_update
+            
+    async def place_order(self, action: dict) -> Optional[str]:
+        """Place an order based on a validated action dictionary.
+        
+        Args:
+            action: A dictionary containing order details (symbol, side, type, quantity)
+            
+        Returns:
+            Order ID if successful, None otherwise
+        """
+        self.logger.info(f"Placing order via OrderManager: {action}")
+        
+        try:
+            # Create order request
+            order_request = OrderRequest(
+                symbol=action['symbol'],
+                side=action['side'],
+                type=action['type'],  # Assuming 'market' for now
+                amount=action['quantity'],
+                price=None  # Market orders don't need a price
+            )
+            
+            # Execute via connector
+            order_response = await self.exchange_connector.create_order_async(order_request)
+            self.logger.info(f"Order placed successfully: {order_response}")
+            
+            # TODO: Store order details (request & response) in database
+            # TODO: Implement order status tracking
+            
+            return order_response.id
+            
+        except Exception as e:
+            self.logger.error(f"Failed to place order for action {action}: {e}", exc_info=True)
+            return None

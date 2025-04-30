@@ -1,7 +1,7 @@
 """Base strategy class for ctrader."""
 
 import abc
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 from src.utils.config import config_manager
 from src.utils.logger import get_logger
@@ -19,15 +19,17 @@ class BaseStrategy(abc.ABC):
         logger: Logger instance for the strategy
     """
     
-    def __init__(self, strategy_id: str, strategy_config: Optional[Dict[str, Any]] = None):
+    def __init__(self, strategy_id: str, strategy_config: Optional[Dict[str, Any]] = None, signal_callback=None):
         """Initialize the strategy.
         
         Args:
             strategy_id: Unique identifier for the strategy instance
             strategy_config: Strategy-specific configuration (overrides config from config_manager)
+            signal_callback: Callback function to emit signals
         """
         self.strategy_id = strategy_id
         self.logger = get_logger(f"strategy.{self.__class__.__name__}.{strategy_id}")
+        self.signal_callback = signal_callback
         
         # Get strategy config from config manager or use provided config
         strategy_type = self.__class__.__name__.lower()
@@ -43,7 +45,7 @@ class BaseStrategy(abc.ABC):
         self.logger.info(f"Strategy {self.__class__.__name__} ({strategy_id}) initialized")
         
     @abc.abstractmethod
-    def initialize(self, exchange_connector: Any, data_cache: Any) -> None:
+    def initialize(self, exchange_connector: Any, data_cache: Any, execution_handler: Any = None) -> None:
         """Initialize the strategy with required components.
         
         This method is called after the strategy is instantiated to provide
@@ -52,17 +54,32 @@ class BaseStrategy(abc.ABC):
         Args:
             exchange_connector: Exchange connector instance
             data_cache: Data cache instance
+            execution_handler: Execution handler instance for processing signals
         """
         pass
         
     @abc.abstractmethod
-    def on_tick(self, market_data: Dict[str, Any]) -> None:
+    def on_tick(self, market_data: Dict[str, Any]) -> List[Dict[str, Any]]:
         """Process a market data tick.
         
         This method is called whenever new market data is available.
         
         Args:
             market_data: Market data dictionary
+            
+        Returns:
+            List of signal dictionaries
+        """
+        pass
+        
+    @abc.abstractmethod
+    def on_trade(self, trade: Dict[str, Any]) -> None:
+        """Process a trade update.
+        
+        This method is called whenever a new trade is received.
+        
+        Args:
+            trade: Trade data dictionary containing at least 'symbol' and 'price'
         """
         pass
         
