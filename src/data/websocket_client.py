@@ -343,7 +343,22 @@ class WebSocketClient:
         self.strategy = strategy
         self.logger = logger
         self.running = False
+        
+        # Add diagnostic logging for symbols
+        self.logger.info(f"Strategy config type: {type(self.strategy.config)}")
+        self.logger.info(f"Strategy config keys: {list(self.strategy.config.keys()) if hasattr(self.strategy.config, 'keys') else 'Not a dict'}")
+        
+        # Get symbols from strategy config
         self.symbols = self.strategy.config.get('symbols', [])
+        self.logger.info(f"Symbols from strategy config: {self.symbols}")
+        self.logger.info(f"Symbols type: {type(self.symbols)}")
+        
+        # Check each symbol to ensure it's a string
+        if isinstance(self.symbols, list):
+            for i, symbol in enumerate(self.symbols):
+                self.logger.info(f"Symbol {i}: {symbol}, type: {type(symbol)}")
+                if not isinstance(symbol, str):
+                    self.logger.error(f"Non-string symbol detected: {symbol}, type: {type(symbol)}")
         
         # Initialize ccxt.pro.binance with keys/testnet from config
         api_key = None
@@ -355,8 +370,8 @@ class WebSocketClient:
             testnet = config.get('exchange', {}).get('testnet', True)
         else:
             # Assume it's a ConfigManager instance
-            api_key = config.get('exchange', 'api_key')
-            api_secret = config.get('exchange', 'api_secret')
+            api_key = config.get('exchange', 'api_key', None)
+            api_secret = config.get('exchange', 'api_secret', None)
             testnet = config.get('exchange', 'testnet', True)
         
         exchange_options = {
@@ -380,7 +395,21 @@ class WebSocketClient:
         This method establishes the WebSocket connection and subscribes to the
         public trades stream for the configured symbols.
         """
+        print(f"STARTUP: WebSocketClient.connect called for symbols: {self.symbols}")
+        self.logger.info(f"STARTUP: WebSocketClient.connect called for symbols: {self.symbols}")
         self.logger.info(f"Connecting to WebSocket for symbols: {self.symbols}")
+        
+        # Add diagnostic logging for symbols right before they're used
+        self.logger.info(f"Symbols type before connection: {type(self.symbols)}")
+        if isinstance(self.symbols, list):
+            for i, symbol in enumerate(self.symbols):
+                self.logger.info(f"Symbol {i} before connection: {symbol}, type: {type(symbol)}")
+                if isinstance(symbol, dict):
+                    self.logger.error(f"Dictionary symbol detected: {symbol}")
+                    # Convert dict symbol to string if possible
+                    if 'symbol' in symbol:
+                        self.logger.warning(f"Attempting to convert dict symbol to string using 'symbol' key: {symbol['symbol']}")
+        
         # No explicit connect needed before watch loop in ccxt.pro
         # The connection is established when watch_trades is called
         
@@ -391,13 +420,50 @@ class WebSocketClient:
         from the watch_trades stream and logging the essential trade details.
         """
         self.running = True
+        
+        # Ensure symbols is a list of strings
+        if not isinstance(self.symbols, list):
+            self.logger.error(f"Expected symbols to be a list, got {type(self.symbols)}: {self.symbols}")
+            self.symbols = [str(self.symbols)]
+        
+        # Convert any non-string symbols to strings
+        for i, symbol in enumerate(self.symbols):
+            if not isinstance(symbol, str):
+                self.logger.warning(f"Converting non-string symbol at index {i} from {type(symbol)} to string: {symbol}")
+                self.symbols[i] = str(symbol)
+        
+        self.logger.info(f"Watching trades for symbols: {self.symbols}")
+        
         while self.running:
             try:
-                # Watch trades for all symbols
-                trades = await self.exchange.watch_trades(self.symbols)
-                for trade in trades:
-                    # Pass trade data to strategy
-                    await self.strategy.on_trade(trade)
+                # Process each symbol individually
+                for symbol in self.symbols:
+                    try:
+                        self.logger.info(f"Watching trades for symbol: {symbol}")
+                        trades = await self.exchange.watch_trades(symbol)
+                        self.logger.info(f"Successfully received trades for {symbol}")
+                        
+                        for trade in trades:
+                            # Enhanced logging for trade data
+                            self.logger.info(f"WS Received Trade: {trade.get('symbol')} Price: {trade.get('price')} Time: {trade.get('datetime')}")
+                            # Pass trade data to strategy
+                            self.logger.info(f"Passing trade to strategy.on_trade: {trade.get('symbol')}")
+                            # Check if on_trade is a coroutine function
+                            import asyncio
+                            if asyncio.iscoroutinefunction(self.strategy.on_trade):
+                                await self.strategy.on_trade(trade)
+                            else:
+                                # Call non-async method directly
+                                self.logger.info(f"Strategy.on_trade is not async, calling directly")
+                                self.strategy.on_trade(trade)
+                    except TypeError as te:
+                        self.logger.error(f"TypeError in watch_trades for symbol {symbol}: {te}")
+                        # If there's a type error with a specific symbol, log it but continue with other symbols
+                        continue
+                    except Exception as e:
+                        self.logger.error(f"Error watching trades for symbol {symbol}: {e}")
+                        # If there's an error with a specific symbol, log it but continue with other symbols
+                        continue
             except Exception as e:
                 self.logger.error(f"WebSocket error: {e}. Attempting reconnect...")
                 await asyncio.sleep(5)  # Delay before implicit reconnect

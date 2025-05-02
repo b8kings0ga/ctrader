@@ -159,113 +159,132 @@ async def main_async(strategy_name: str, symbol: str, paper_trading: bool):
         symbol: Symbol to trade
         paper_trading: Whether to use paper trading
     """
+    # Setup logging first
+    setup_logger()
+    # Get logger after setup
+    main_logger = get_logger("main")
+    
+    # Add early diagnostic logging
+    print(f"STARTUP: main_async called with strategy={strategy_name}, symbol={symbol}, paper_trading={paper_trading}")
+    main_logger.info(f"STARTUP: main_async called with strategy={strategy_name}, symbol={symbol}, paper_trading={paper_trading}")
+    
     # Initialize ConfigManager
     config = config_manager
-    
-    # Setup logging
-    logger = get_logger("main")
-    setup_logger()
     
     # Initialize the database
     try:
         init_db()
-        logger.info("Database initialized successfully.")
+        main_logger.info("Database initialized successfully.")
     except Exception as e:
-        logger.error(f"Failed to initialize database: {e}")
+        main_logger.error(f"Failed to initialize database: {e}")
         # Re-raise to stop execution if DB init fails
         raise
     
-    logger.info(f"Starting ctrader with strategy {strategy_name} on {symbol}")
-    logger.info(f"Mode: {'Paper Trading' if paper_trading else 'Live Trading'}")
+    main_logger.info(f"Starting ctrader with strategy {strategy_name} on {symbol}")
+    main_logger.info(f"Mode: {'Paper Trading' if paper_trading else 'Live Trading'}")
     
     try:
-        # Initialize connector (use mock for paper trading or if real one isn't ready)
+        # Initialize connector (use real Binance connector with testnet for paper trading)
         if paper_trading:
-            logger.info("Using mock connector for paper trading")
-            connector = MagicMock()
-            
-            # Configure the mock to log order creation
-            def mock_create_order(order_request):
-                logger.info(f"Mock order created: {order_request.symbol} {order_request.side} {order_request.amount}")
-                return OrderResponse(
-                    id=f"mock-{asyncio.get_event_loop().time()}",
-                    symbol=order_request.symbol,
-                    side=order_request.side,
-                    type=order_request.type,
-                    amount=order_request.amount,
-                    price=order_request.price,
-                    status="open",
-                    timestamp=int(asyncio.get_event_loop().time() * 1000),
-                    datetime="2023-01-01T00:00:00.000Z",
-                    raw={}
-                )
+            main_logger.info("Using real Binance connector with testnet for paper trading")
+            # Ensure testnet is enabled in config
+            if not config_manager.get("exchange", "testnet", True):
+                main_logger.warning("Testnet was disabled in config but paper trading was requested. Enabling testnet.")
+                config_manager.set("exchange", "testnet", True)
                 
-            connector.create_order = mock_create_order
+            # Use the real Binance connector which will use testnet based on config
+            connector = binance_connector
+            main_logger.info(f"Binance testnet mode: {connector.exchange.options.get('testnet', False)}")
+            main_logger.info(f"Using API Key: {config_manager.get('exchange', 'api_key', '')[:5]}... (truncated)")
         else:
-            logger.info("Using real Binance connector")
+            main_logger.info("Using real Binance connector for live trading")
             connector = binance_connector
         
         # Initialize RiskManager
-        logger.info("Initializing RiskManager...")
-        risk_manager = RiskManager(config=config, logger=logger)
+        main_logger.info("Initializing RiskManager...")
+        risk_manager = RiskManager(config=config, logger=main_logger)
+        print("STARTUP: RiskManager initialized")
+        main_logger.info("STARTUP: RiskManager initialized")
         
         # Get strategy configuration
-        strategy_config = config.get('strategies', {}).get(strategy_name, {})
+        strategy_config = config.get('strategies', None, {}).get(strategy_name, {})
         
         # Ensure symbols are correctly sourced
         strategy_config['symbols'] = strategy_config.get('symbols', [symbol])
         
         # Initialize Strategy with execution_handler.handle_signal as the callback
-        logger.info(f"Initializing strategy {strategy_name} with config: {strategy_config}")
+        main_logger.info(f"Initializing strategy {strategy_name} with config: {strategy_config}")
         strategy = SimpleArbitrageStrategy(
             strategy_id=strategy_name,
             strategy_config=strategy_config,
             signal_callback=None  # We'll set this after initializing ExecutionHandler
         )
+        print(f"STARTUP: Strategy {strategy_name} initialized")
+        main_logger.info(f"STARTUP: Strategy {strategy_name} initialized")
         
         # Initialize OrderManager with connector
-        logger.info("Initializing OrderManager...")
+        main_logger.info("Initializing OrderManager...")
         order_manager = OrderManager(
             config=config,
-            logger=logger,
+            logger=main_logger,
             exchange_connector=connector
         )
         
         # Initialize ExecutionHandler with risk_manager, strategy, and order_manager
-        logger.info("Initializing ExecutionHandler...")
+        main_logger.info("Initializing ExecutionHandler...")
         execution_handler = ExecutionHandler(
             config=config,
-            logger=logger,
+            logger=main_logger,
             risk_manager=risk_manager,
             strategy=strategy,
             order_manager=order_manager
         )
         
+        # Initialize the strategy with required components
+        main_logger.info("Initializing strategy with exchange_connector, data_cache, and execution_handler...")
+        strategy.initialize(
+            exchange_connector=connector,
+            data_cache=None,  # We don't have a data_cache in this context
+            execution_handler=execution_handler
+        )
+        main_logger.info("Strategy initialized successfully")
+        
         # Set the signal callback on the strategy
         strategy.signal_callback = execution_handler.handle_signal
+        main_logger.info("Set signal_callback on strategy to execution_handler.handle_signal")
+        
+        # Verify the signal_callback is set correctly
+        if strategy.signal_callback is not None:
+            main_logger.info(f"Verified signal_callback is set on strategy: {strategy.signal_callback.__name__}")
+        else:
+            main_logger.error("signal_callback is NOT set on strategy!")
         
         # Initialize WebSocketClient
-        logger.info("Initializing WebSocketClient...")
-        ws_client = WebSocketClient(config=config, strategy=strategy, logger=logger)
+        main_logger.info("Initializing WebSocketClient...")
+        ws_client = WebSocketClient(config=config, strategy=strategy, logger=main_logger)
+        print("STARTUP: WebSocketClient initialized")
+        main_logger.info("STARTUP: WebSocketClient initialized")
         
-        logger.info("System initialized, starting WebSocket client...")
+        main_logger.info("System initialized, starting WebSocket client...")
+        print("STARTUP: About to start WebSocketClient")
+        main_logger.info("STARTUP: About to start WebSocketClient")
         
         # Start the WebSocket client and handle shutdown
         try:
             await ws_client.start()
         except KeyboardInterrupt:
-            logger.info("KeyboardInterrupt received. Shutting down...")
+            main_logger.info("KeyboardInterrupt received. Shutting down...")
         except Exception as e:
-            logger.error(f"Error during WebSocket client run: {e}", exc_info=True)
+            main_logger.error(f"Error during WebSocket client run: {e}", exc_info=True)
         finally:
-            logger.info("Attempting to stop WebSocket client...")
+            main_logger.info("Attempting to stop WebSocket client...")
             await ws_client.stop()
-            logger.info("WebSocket client stopped.")
+            main_logger.info("WebSocket client stopped.")
         
     except Exception as e:
-        logger.error(f"Error in main_async: {e}", exc_info=True)
+        main_logger.error(f"Error in main_async: {e}", exc_info=True)
     finally:
-        logger.info("Shutting down ctrader")
+        main_logger.info("Shutting down ctrader")
 
 
 @app.command()
@@ -281,6 +300,10 @@ def run(
     ),
 ):
     """Run the trading system."""
+    # Add early diagnostic logging
+    print("STARTUP: run command called")
+    console.print("[bold green]STARTUP: run command called[/bold green]")
+    logger.info("STARTUP: run command called")
     # Get default values from config
     default_strategy = config_manager.get("general", "default_strategy", "simple_arbitrage")
     default_symbol = config_manager.get("general", "default_symbol", "BTC/USDT")
@@ -290,7 +313,7 @@ def run(
     symbol_to_run = symbol if symbol is not None else default_symbol
 
     # Validate strategy exists in config
-    strategies = config_manager.get("strategies", default={})
+    strategies = config_manager.get("strategies", None, {})
     if not strategies:
         console.print("[bold red]No strategies configured![/bold red]")
         raise typer.Exit(1)
@@ -301,6 +324,7 @@ def run(
         raise typer.Exit(1)
 
     # Validate symbol exists in config
+    # Get symbols from data section with empty list as default
     symbols = config_manager.get("data", "symbols", [])
     if symbols and symbol_to_run not in symbols:
         console.print(f"[bold yellow]Warning: Symbol '{symbol_to_run}' not found in configured symbols![/bold yellow]")
@@ -492,11 +516,13 @@ def download_data(
     exchange = ccxt.binance({
         'enableRateLimit': True,  # Important for fetching large amounts of data
         # Add API keys here if needed for higher rate limits, though often not required for public data
-        # 'apiKey': config_manager.get("exchange", "api_key", ""),
-        # 'secret': config_manager.get("exchange", "api_secret", ""),
+        # Fix parameter mismatch: pass None as key and "" as default
+        # 'apiKey': config_manager.get("exchange", "api_key", None, ""),
+        # 'secret': config_manager.get("exchange", "api_secret", None, ""),
     })
     
     # Use testnet if configured
+    # Get testnet setting with True as default
     testnet = config_manager.get("exchange", "testnet", True)
     if testnet:
         exchange.set_sandbox_mode(True)

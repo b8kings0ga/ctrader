@@ -294,9 +294,19 @@ class OrderManager:
         Returns:
             Order ID if successful, None otherwise
         """
-        self.logger.info(f"Placing order via OrderManager: {action}")
+        self.logger.info(f"OrderManager.place_order called with action: {action}")
         
         try:
+            # Validate action has required fields
+            required_fields = ['symbol', 'side', 'type', 'quantity']
+            for field in required_fields:
+                if field not in action:
+                    self.logger.error(f"Action missing required field '{field}': {action}")
+                    return None
+            
+            # Log detailed information about the order
+            self.logger.info(f"Creating order: {action['side']} {action['quantity']} {action['symbol']} @ {action['type']}")
+            
             # Create order request
             order_request = OrderRequest(
                 symbol=action['symbol'],
@@ -306,14 +316,35 @@ class OrderManager:
                 price=None  # Market orders don't need a price
             )
             
+            # Log the exchange connector being used
+            self.logger.info(f"Using exchange connector: {self.exchange_connector.__class__.__name__}")
+            
             # Execute via connector
-            order_response = await self.exchange_connector.create_order_async(order_request)
-            self.logger.info(f"Order placed successfully: {order_response}")
-            
-            # TODO: Store order details (request & response) in database
-            # TODO: Implement order status tracking
-            
-            return order_response.id
+            self.logger.info(f"Calling exchange_connector.create_order_async with request: {order_request}")
+            try:
+                order_response = await self.exchange_connector.create_order_async(order_request)
+                self.logger.info(f"Order placed successfully: {order_response}")
+                
+                # Store order details in database
+                try:
+                    execution_data = {
+                        'order_id': order_response.id,
+                        'symbol': action['symbol'],
+                        'side': action['side'],
+                        'type': action['type'],
+                        'quantity_requested': action['quantity'],
+                        'status': 'new',
+                        'exchange_response': order_response.dict() if hasattr(order_response, 'dict') else str(order_response)
+                    }
+                    save_execution(execution_data)
+                    self.logger.info(f"Order execution saved to database: {order_response.id}")
+                except Exception as db_e:
+                    self.logger.error(f"Failed to save execution to database: {db_e}")
+                
+                return order_response.id
+            except Exception as order_e:
+                self.logger.error(f"Error from exchange when creating order: {order_e}")
+                raise
             
         except Exception as e:
             self.logger.error(f"Failed to place order for action {action}: {e}", exc_info=True)

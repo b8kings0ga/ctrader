@@ -31,25 +31,82 @@ class RiskManager:
         self.config = config or config_manager
         self.logger = logger or get_logger("risk.risk_manager")
         
-        # Load risk configuration
-        self.risk_config = self.config.get("risk", {})
-        self.max_position_size = self.risk_config.get("max_position_size", 100)
-        self.max_open_positions = self.risk_config.get("max_open_positions", 3)
-        self.max_order_quantity = self.risk_config.get("max_order_quantity", 1.0)
-        self.stop_loss_percentage = self.risk_config.get("stop_loss_percentage", 0.01)
-        self.daily_loss_limit = self.risk_config.get("daily_loss_limit", 50)
-        self.max_order_value_usd = self.risk_config.get("max_order_value_usd", 100.0)
+        # Add debug logging for config type
+        self.logger.info(f"RiskManager initialized with config type: {type(self.config)}")
         
-        # Initialize position tracking dictionary
-        self.positions = {}  # {symbol: current_position_size}
-        
-        self.logger.info("Risk manager initialized")
-        self.logger.debug(f"Risk parameters: max_position_size={self.max_position_size}, "
-                         f"max_open_positions={self.max_open_positions}, "
-                         f"max_order_quantity={self.max_order_quantity}, "
-                         f"stop_loss_percentage={self.stop_loss_percentage}, "
-                         f"daily_loss_limit={self.daily_loss_limit}, "
-                         f"max_order_value_usd={self.max_order_value_usd}")
+        try:
+            if hasattr(self.config, 'config'):
+                self.logger.info("Config is a ConfigManager instance")
+                # Load risk configuration
+                try:
+                    self.logger.info("Attempting to get risk configuration from ConfigManager")
+                    self.logger.info(f"Type of 'risk' parameter: {type('risk')}")
+                    self.logger.info(f"Value of 'risk' parameter: {'risk'}")
+                    
+                    # Get risk configuration with empty dict as default
+                    self.risk_config = self.config.get("risk", None, {})
+                    self.logger.info(f"Retrieved risk_config: {self.risk_config}")
+                except Exception as e:
+                    self.logger.error(f"Error getting risk configuration: {e}")
+                    self.risk_config = {}
+            else:
+                self.logger.info("Config is a dictionary, not a ConfigManager instance")
+                # If config is a dictionary, use it directly
+                try:
+                    self.logger.info("Attempting to get risk configuration from dictionary")
+                    self.risk_config = self.config.get("risk", None, {}) if isinstance(self.config, dict) else {}
+                    self.logger.info(f"Retrieved risk_config: {self.risk_config}")
+                except Exception as e:
+                    self.logger.error(f"Error getting risk configuration from dictionary: {e}")
+                    self.risk_config = {}
+            
+            # Log the risk_config type
+            self.logger.info(f"risk_config type: {type(self.risk_config)}")
+        except Exception as e:
+            self.logger.error(f"Error in RiskManager initialization: {e}")
+            self.risk_config = {}
+        try:
+            self.logger.info("Loading risk parameters from risk_config")
+            self.max_position_size = self.risk_config.get("max_position_size", 100)
+            self.logger.info(f"max_position_size: {self.max_position_size}")
+            
+            self.max_open_positions = self.risk_config.get("max_open_positions", 3)
+            self.logger.info(f"max_open_positions: {self.max_open_positions}")
+            
+            self.max_order_quantity = self.risk_config.get("max_order_quantity", 1.0)
+            self.logger.info(f"max_order_quantity: {self.max_order_quantity}")
+            
+            self.stop_loss_percentage = self.risk_config.get("stop_loss_percentage", 0.01)
+            self.logger.info(f"stop_loss_percentage: {self.stop_loss_percentage}")
+            
+            self.daily_loss_limit = self.risk_config.get("daily_loss_limit", 50)
+            self.logger.info(f"daily_loss_limit: {self.daily_loss_limit}")
+            
+            self.max_order_value_usd = self.risk_config.get("max_order_value_usd", 100.0)
+            self.logger.info(f"max_order_value_usd: {self.max_order_value_usd}")
+            
+            # Initialize position tracking dictionary
+            self.logger.info("Initializing positions dictionary")
+            self.positions = {}  # {symbol: current_position_size}
+            self.logger.info(f"positions initialized: {self.positions}")
+            
+            self.logger.info("Risk manager initialized successfully")
+            self.logger.debug(f"Risk parameters: max_position_size={self.max_position_size}, "
+                             f"max_open_positions={self.max_open_positions}, "
+                             f"max_order_quantity={self.max_order_quantity}, "
+                             f"stop_loss_percentage={self.stop_loss_percentage}, "
+                             f"daily_loss_limit={self.daily_loss_limit}, "
+                             f"max_order_value_usd={self.max_order_value_usd}")
+        except Exception as e:
+            self.logger.error(f"Error initializing risk parameters: {e}")
+            # Set default values
+            self.max_position_size = 100
+            self.max_open_positions = 3
+            self.max_order_quantity = 1.0
+            self.stop_loss_percentage = 0.01
+            self.daily_loss_limit = 50
+            self.max_order_value_usd = 100.0
+            self.positions = {}
         
     def check_order_risk(self, order_params: Dict[str, Any]) -> bool:
         """Check if an order meets risk criteria.
@@ -139,10 +196,13 @@ class RiskManager:
         Returns:
             True if the order is allowed, False otherwise
         """
-        self.logger.debug(f"Checking order risk for action: {action}")
+        self.logger.info(f"RiskManager.check_order called with action: {action}")
+        self.logger.info(f"latest_prices type: {type(latest_prices)}")
+        self.logger.info(f"latest_prices content: {latest_prices}")
         
         # Extract order parameters
         symbol = action.get("symbol")
+        self.logger.info(f"Symbol from action: {symbol}, type: {type(symbol)}")
         quantity = action.get("quantity", 0.0)
         side = action.get("side", "").lower()
         
@@ -151,12 +211,23 @@ class RiskManager:
             self.logger.warning(f"Invalid order parameters: {action}")
             return False
         
+        # Check if symbol is a dictionary (which would cause the unhashable type error)
+        if isinstance(symbol, dict):
+            self.logger.error(f"Symbol is a dictionary, which is unhashable: {symbol}")
+            return False
+            
         # Get the latest price for the symbol
         if symbol not in latest_prices:
             self.logger.warning(f"Cannot assess risk for {symbol}: price not available")
             return False
             
         price = latest_prices[symbol]
+        self.logger.info(f"Price for {symbol}: {price}, type: {type(price)}")
+        
+        # If price is None, we can't proceed with risk calculation
+        if price is None:
+            self.logger.warning(f"Price for {symbol} is None, cannot calculate risk")
+            return False
         
         # Extract base and quote currencies from symbol (e.g., "BTC-USDT" -> "BTC", "USDT")
         symbol_parts = symbol.split("-") if "-" in symbol else symbol.split("/")
@@ -176,11 +247,12 @@ class RiskManager:
         
         # Check if the estimated USD value exceeds max_order_value_usd
         if estimated_usd_value > self.max_order_value_usd:
-            self.logger.warning(
-                f"Order rejected by RiskManager: Value {estimated_usd_value:.2f} exceeds max {self.max_order_value_usd:.2f} USD for {action}"
-            )
+            # Add warning log with more details about the risk check failure
+            self.logger.warning(f"Risk Check FAIL: Value {estimated_usd_value:.2f} > Max {self.max_order_value_usd:.2f}. Action: {action}")
             return False
         
         # All checks passed
+        # Add debug log for successful risk check
+        self.logger.debug(f"Risk Check PASS. Action: {action}")
         self.logger.info(f"Order passed risk checks: {action}")
         return True

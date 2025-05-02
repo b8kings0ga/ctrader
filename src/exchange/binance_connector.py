@@ -224,7 +224,23 @@ class BinanceConnector:
         Returns:
             Order response
         """
+        logger.info(f"BinanceConnector.create_order_async called with: {order_request}")
+        
         try:
+            # Log the exchange instance being used
+            logger.info(f"Using async_exchange: {self.async_exchange}")
+            logger.info(f"Exchange testnet mode: {self.async_exchange.options.get('testnet', False)}")
+            
+            # Log API credentials status (without revealing actual keys)
+            has_api_key = bool(self.async_exchange.apiKey)
+            has_api_secret = bool(self.async_exchange.secret)
+            logger.info(f"Exchange has API key: {has_api_key}, has API secret: {has_api_secret}")
+            
+            # Log the order parameters
+            logger.info(f"Creating order: {order_request.side} {order_request.amount} {order_request.symbol} @ {order_request.type}")
+            
+            # Execute the order
+            logger.info("Calling async_exchange.create_order...")
             response = await self.async_exchange.create_order(
                 symbol=order_request.symbol,
                 type=order_request.type,
@@ -233,6 +249,9 @@ class BinanceConnector:
                 price=order_request.price,
                 params=order_request.params,
             )
+            
+            # Log the response
+            logger.info(f"Order created successfully, response: {response}")
             
             return OrderResponse(
                 id=response["id"],
@@ -247,7 +266,10 @@ class BinanceConnector:
                 raw=response,
             )
         except Exception as e:
-            logger.error(f"Error creating order: {e}")
+            logger.error(f"Error creating order: {e}", exc_info=True)
+            # Log more details about the error
+            if hasattr(e, 'args') and len(e.args) > 0:
+                logger.error(f"Error details: {e.args}")
             raise
             
     def cancel_order(self, order_id: str, symbol: str) -> Dict[str, Any]:

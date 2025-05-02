@@ -44,27 +44,45 @@ class ExecutionHandler:
         Args:
             signal: Signal data dictionary
         """
-        self.logger.debug(f"Received signal: {signal}")
+        self.logger.info(f"ExecutionHandler received signal: {signal}")
         
         # Check if the signal is valid
         if signal.get('type') != 'signal' or 'actions' not in signal:
-            self.logger.warning(f"Invalid signal format: {signal}")
+            self.logger.error(f"Invalid signal format: {signal}")
             return
         
+        self.logger.info(f"Signal is valid, processing {len(signal['actions'])} actions")
+        
         # Process each action in the signal
-        for action in signal['actions']:
+        for i, action in enumerate(signal['actions']):
+            # Add enhanced logging before risk check
+            self.logger.info(f"Processing action {i+1}/{len(signal['actions'])}: {action}")
+            
             # Perform RiskManager check for this action
             if self.risk_manager and self.strategy:
-                is_allowed = self.risk_manager.check_order(action, self.strategy.latest_prices)
-                if not is_allowed:
-                    self.logger.info(f"Action rejected by RiskManager: {action}")
+                self.logger.info(f"Checking action with RiskManager")
+                try:
+                    is_allowed = self.risk_manager.check_order(action, self.strategy.latest_prices)
+                    if not is_allowed:
+                        self.logger.warning(f"Action rejected by RiskManager: {action}")
+                        continue
+                    self.logger.info(f"Action approved by RiskManager")
+                except Exception as e:
+                    self.logger.error(f"Error in RiskManager.check_order: {e}")
                     continue
+            else:
+                self.logger.warning(f"RiskManager or strategy not available, skipping risk check")
             
             # Place the order via OrderManager
             if self.order_manager:
-                await self.order_manager.place_order(action)
+                self.logger.info(f"Placing order via OrderManager: {action}")
+                try:
+                    order_id = await self.order_manager.place_order(action)
+                    self.logger.info(f"Order placed successfully, order_id: {order_id}")
+                except Exception as e:
+                    self.logger.error(f"Error placing order: {e}")
             else:
-                self.logger.warning(
+                self.logger.error(
                     f"OrderManager not available, skipping order: {action.get('side')} "
                     f"{action.get('quantity')} {action.get('symbol')} @ {action.get('type')}"
                 )

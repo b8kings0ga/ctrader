@@ -12,8 +12,9 @@ general:
 # Exchange settings
 exchange:
   name: binance
-  api_key: ""  # Will be overridden by environment variables
-  api_secret: ""  # Will be overridden by environment variables
+  api_key: "QkqKA3sote1KXxF2fKF1gs0QdloiW0hauyBaDQ40e1VENG6ni2LCFWJ3aBAnIrBn"  # Binance testnet API key
+  api_secret: "Ca3Sdso53DYBbZbsUmM2yxd995EePIoBZSrhMyEyKZjrWVZWnk3et1qva1BBCJVW"  # Binance testnet Secret key
+  user_id: "1746169853214233368"  # Binance testnet User ID
   testnet: true  # Use testnet for development
   rate_limit:
     max_requests_per_minute: 1200

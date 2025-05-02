@@ -55,7 +55,7 @@ class SimpleArbitrageStrategy(BaseStrategy):
         
         # Initialize latest prices dictionary for trade data
         self.latest_prices = {symbol: None for symbol in self.symbols}
-        self.threshold = self.config.get("threshold", 0.001)  # Default 0.1% profit threshold
+        self.threshold = self.config.get("threshold", 0.00001)  # Lowered threshold for testing pipeline
         
         # Initialize ML components
         self.feature_engineer = FeatureEngineering()
@@ -468,6 +468,9 @@ class SimpleArbitrageStrategy(BaseStrategy):
         Args:
             trade: Trade data dictionary containing at least 'symbol' and 'price'
         """
+        # Enhanced logging at the beginning
+        self.logger.info(f"on_trade received: {trade.get('symbol')} at price {trade.get('price')}")
+        
         symbol = trade.get('symbol')
         price = trade.get('price')
         
@@ -476,16 +479,22 @@ class SimpleArbitrageStrategy(BaseStrategy):
             return
             
         if symbol not in self.symbols:
+            self.logger.info(f"Symbol {symbol} not in configured symbols {self.symbols}, ignoring")
             return
             
         # Update latest price for this symbol
         self.latest_prices[symbol] = price
-        self.logger.debug(f"Updated latest price for {symbol}: {price}")
+        # Enhanced logging after updating price
+        self.logger.info(f"Updated latest_prices: {self.latest_prices}")
         
         # Check if we have prices for all required symbols
         if all(price is not None for price in self.latest_prices.values()):
+            self.logger.info(f"Have prices for all symbols, checking for arbitrage opportunities")
             # This will generate and emit signals if opportunities are found
             self._check_triangular_arbitrage_from_trades()
+        else:
+            missing_prices = [s for s, p in self.latest_prices.items() if p is None]
+            self.logger.info(f"Still missing prices for: {missing_prices}")
     
     def _check_triangular_arbitrage_from_trades(self) -> None:
         """Check for triangular arbitrage opportunities using latest trade prices.
@@ -495,13 +504,32 @@ class SimpleArbitrageStrategy(BaseStrategy):
         1. USDT -> ETH -> BTC -> USDT
         2. USDT -> BTC -> ETH -> USDT
         
+        Added detailed logging to diagnose why no trades are being made.
+        
         If a profitable opportunity is found, it generates a signal and emits it via the callback.
         """
-        # Example with symbols ['BTC/USDT', 'ETH/USDT', 'ETH/BTC']
-        # Check if we have the required symbols
+        # Add debug logging at the beginning
+        self.logger.debug("Performing arbitrage check...")
+        
+        # Check if we have the required symbols for triangular arbitrage
         required_symbols = ['BTC/USDT', 'ETH/USDT', 'ETH/BTC']
-        if not all(symbol in self.latest_prices for symbol in required_symbols):
+        self.logger.info(f"Checking for required symbols: {required_symbols}")
+        self.logger.info(f"Configured symbols: {self.symbols}")
+        self.logger.info(f"Latest prices: {self.latest_prices}")
+        
+        # Verify all required symbols are in our configuration
+        missing_from_config = [s for s in required_symbols if s not in self.symbols]
+        if missing_from_config:
+            self.logger.error(f"Missing required symbols in configuration: {missing_from_config}")
             return
+            
+        # Verify we have prices for all required symbols
+        missing_prices = [s for s in required_symbols if s not in self.latest_prices]
+        if missing_prices:
+            self.logger.warning(f"Missing prices for required symbols: {missing_prices}")
+            return
+            
+        self.logger.info(f"All required symbols have prices, proceeding with arbitrage check")
             
         try:
             # Path 1: USDT -> ETH -> BTC -> USDT
@@ -514,8 +542,12 @@ class SimpleArbitrageStrategy(BaseStrategy):
             # Calculate profit percentage
             profit_pct = (final_usdt - 1.0) / 1.0
             
+            # Enhanced logging for profit percentage and threshold comparison
+            self.logger.info(f"Path 1 Profit: {profit_pct:.6%}, Threshold: {self.threshold:.6%}, Profitable: {profit_pct > self.threshold}")
+            self.logger.info(f"  Steps: 1 USDT -> {eth_amount:.8f} ETH -> {btc_amount:.8f} BTC -> {final_usdt:.8f} USDT")
+            
             if profit_pct > self.threshold:
-                self.logger.info(f"Arbitrage Opportunity (Path 1): USDT->ETH->BTC->USDT, Profit: {profit_pct:.4%}")
+                self.logger.info(f"Arbitrage Opportunity (Path 1): USDT->ETH->BTC->USDT, Profit: {profit_pct:.4%}, EXCEEDS threshold {self.threshold:.6%}")
                 
                 # Calculate quantities for each leg
                 base_usdt_qty = 10.0  # Example fixed amount
@@ -538,17 +570,27 @@ class SimpleArbitrageStrategy(BaseStrategy):
                 
                 # Emit signal via callback if available
                 if self.signal_callback:
+                    self.logger.info(f"Signal callback is available, attempting to send signal")
                     if asyncio.iscoroutinefunction(self.signal_callback):
                         # We're in an async context, so we need to await the callback
                         # Since on_trade is not async, we need to create a task
                         try:
+                            self.logger.info(f"Signal callback is a coroutine function, creating task")
                             loop = asyncio.get_event_loop()
                             loop.create_task(self.signal_callback(signal))
-                        except RuntimeError:
-                            self.logger.warning("No event loop running - cannot emit signal asynchronously")
+                            self.logger.info(f"Created task for async signal callback")
+                        except RuntimeError as e:
+                            self.logger.error(f"No event loop running - cannot emit signal asynchronously: {e}")
                     else:
                         # Synchronous callback
-                        self.signal_callback(signal)
+                        self.logger.info(f"Signal callback is synchronous, calling directly")
+                        try:
+                            self.signal_callback(signal)
+                            self.logger.info(f"Successfully called signal callback")
+                        except Exception as e:
+                            self.logger.error(f"Error calling signal callback: {e}")
+                else:
+                    self.logger.warning(f"No signal callback available, cannot send signal")
             
             # Path 2: USDT -> BTC -> ETH -> USDT
             # Step 1: Buy BTC with USDT
@@ -560,8 +602,12 @@ class SimpleArbitrageStrategy(BaseStrategy):
             # Calculate profit percentage
             profit_pct = (final_usdt - 1.0) / 1.0
             
+            # Enhanced logging for profit percentage and threshold comparison
+            self.logger.info(f"Path 2 Profit: {profit_pct:.6%}, Threshold: {self.threshold:.6%}, Profitable: {profit_pct > self.threshold}")
+            self.logger.info(f"  Steps: 1 USDT -> {btc_amount:.8f} BTC -> {eth_amount:.8f} ETH -> {final_usdt:.8f} USDT")
+            
             if profit_pct > self.threshold:
-                self.logger.info(f"Arbitrage Opportunity (Path 2): USDT->BTC->ETH->USDT, Profit: {profit_pct:.4%}")
+                self.logger.info(f"Arbitrage Opportunity (Path 2): USDT->BTC->ETH->USDT, Profit: {profit_pct:.4%}, EXCEEDS threshold {self.threshold:.6%}")
                 
                 # Calculate quantities for each leg
                 base_usdt_qty = 10.0  # Example fixed amount

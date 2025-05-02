@@ -104,13 +104,33 @@ class ConfigManager:
         Returns:
             Configuration value or default
         """
-        if section not in self.config:
-            return default
-            
-        if key is None:
-            return self.config[section]
-            
-        return self.config[section].get(key, default)
+        import logging
+        logger = logging.getLogger("config_manager")
+        logger.setLevel(logging.DEBUG)
+        
+        logger.info(f"ConfigManager.get called with section={section}, key={key}, default={default}")
+        logger.info(f"section type: {type(section)}")
+        logger.info(f"key type: {type(key)}")
+        logger.info(f"default type: {type(default)}")
+        logger.info(f"self.config type: {type(self.config)}")
+        logger.info(f"self.config keys: {list(self.config.keys())}")
+        
+        try:
+            if section not in self.config:
+                logger.info(f"Section {section} not found in config, returning default")
+                return default
+                
+            if key is None:
+                logger.info(f"Key is None, returning entire section {section}")
+                return self.config[section]
+                
+            logger.info(f"Returning config[{section}].get({key}, {default})")
+            return self.config[section].get(key, default)
+        except Exception as e:
+            logger.error(f"Error in ConfigManager.get: {e}")
+            import traceback
+            logger.error(traceback.format_exc())
+            raise
         
     def set(self, section: str, key: str, value: Any) -> None:
         """Set a configuration value.
